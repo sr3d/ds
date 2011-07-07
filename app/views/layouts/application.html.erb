@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>DropSocial</title>
-  <%= stylesheet_link_tag 'reset', 'text', '960', 'jquery-ui-1.8.13.custom','front', 'shared', 'fullcalendar', 'facebox', :cache => true %>  
-  <%= stylesheet_link_tag 'formtastic', 'formtastic_changes', :cache => true %>  
+  <%= stylesheet_link_tag 'reset', 'text', '960', 'jquery-ui-1.8.13.custom','front', 'shared', 'fullcalendar', 'facebox', :cache => !true %>  
+  <%= stylesheet_link_tag 'formtastic', 'formtastic_changes', :cache => !true %>  
   <%= stylesheet_link_tag 'app' %>
   <%= javascript_include_tag :defaults, 'fullcalendar.min', 'facebox' %>
   <%= csrf_meta_tag %>
