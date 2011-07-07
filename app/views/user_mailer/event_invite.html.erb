@@ -1,0 +1,50 @@
+<html>
+  
+  <head>
+    
+  </head>
+  
+  
+  <body>
+    
+    <h5><%= @user.full_name %> has invited you to an event on DropSocial: <%= @event.name %></h5>
+    
+    
+    <div>
+      <a href="<%= @fbconnect_url %>">Sign up with FaceBook Connect</a>
+    </div>
+    
+    <div>
+      <table cellspacing="0" cellpadding="10" border="0">
+        <tr>
+          <td width="270" valign="top">
+            <h5><%= @event.name %></h5>
+            
+            <table cellspacing="0" cellpadding="10" border="0">
+              <tr>
+                <td width="100" valign="top">When</td>
+                <td width="120" valign="top"><%= @event.to_formatted_time %></td>
+              </tr>
+            </table>
+          </td>
+          <td width="270" valign="top">
+            <h5>Who else is invited?</h5>
+            <% @all_attendants.each do |attendant| %>
+              <p><%= attendant.full_name %></p>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+    
+    
+    <div>
+      <h5>What is DropSocial?</h5>
+      <div>
+        Copy
+      </div>
+    </div>
+    
+  </body>
+  
+</html>

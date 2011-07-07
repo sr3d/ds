@@ -1,0 +1,28 @@
+<div class="grid_10">
+  <h3>User Profile for <%= @user.full_name %></h3>
+  
+  
+  <div class="events_wrapper">
+    <h4>Events <%= @user.full_name %> is attending</h4>
+    
+    <% if @events.empty? %>
+      <div>
+        <%= @user.full_name %> doesn't attend any event right now.
+      </div>
+      
+    <% else %>
+      <div>
+        <ul>
+          <% @events.each do |event| %>
+            <li><a href="<%= event_path(event)%>"><%= event.name %></a></li>
+          <% end %>
+        </ul>
+      </div>
+    
+    
+    <% end %>
+    
+    
+  </div><!-- .events_wrapper -->
+  
+</div><!-- .grid_10 -->

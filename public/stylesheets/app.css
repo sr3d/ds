@@ -1,0 +1,39 @@
+body { padding: 0; margin: 0; color: #5f5f5f; text-shadow: white -1px 1px 1px; }
+
+/*#modal_background { -moz-opacity:0.4; opacity: 0.4; width: 100%; height: 100%; background-color: #c8c8c8; position: absolute; top: 0px; left: 0px; }*/
+
+h1 .small a { font-size: 12px !important; }
+
+
+.logistic_wrapper {}
+.logistic_wrapper .row {}
+/*.logistic_wrapper .left { float: left; width: 100px; }
+.logistic_wrapper .right { float: left; margin-righ: 100px; }*/
+
+
+
+#calendar_wrapper .days_wrapper {border-top: 1px solid #c3e4f1; padding-bottom: 10px; }
+#calendar_wrapper .days_wrapper table { /*width: 850px; */padding: 5px; margin: 0px auto; }
+  #calendar_wrapper .days_wrapper tr td, .days_wrapper tr th { vertical-align: top; width: 130px; }
+  #calendar_wrapper .days_wrapper tr th { font-size: 12px; border-bottom: 1px solid #90CEE6; background-color: #F8F8FF; }
+    #calendar_wrapper .days_wrapper tr th .padding{ padding: 10px 2px}
+
+  #calendar_wrapper .days_wrapper tr td { height: 70px; border-bottom: 1px solid #DCDCDC;  }
+  #calendar_wrapper .days_wrapper tr td.hover { background-color: #ECF5D7; /*border-left: 1px solid #DCDCDC; border-right: 1px solid #DCDCDC;*/ }
+
+    
+  #calendar_wrapper .days_wrapper tr td.today { background-color: #E2ECF1; }
+  #calendar_wrapper .days_wrapper tr td .day_of_month { font-size: 20px;}
+  #calendar_wrapper .days_wrapper tr td .action { display: none;}
+  #calendar_wrapper .days_wrapper tr td.hover .action { display: inline; background-color: #383838; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;}
+    #calendar_wrapper .days_wrapper tr td.hover .action a { padding: 2px; color: white; }
+     
+  #calendar_wrapper .days_wrapper tr td a.day { font-size: 11px;color: black; width: 100%; padding: 2px 2px; text-decoration: none; text-align: center; -moz-outline-style: none; outline: none;}
+  #calendar_wrapper .days_wrapper tr td a.day:hover { background-color: #6cb1ce; font-weight: bold;} 
+  #calendar_wrapper .days_wrapper tr td.other_month { color: #DCDCDC; }
+  #calendar_wrapper .days_wrapper tr td a.has_item { background-color: #559cbb;  }
+  #calendar_wrapper .days_wrapper tr td.today a, .days_wrapper tr td a.day:hover, .days_wrapper tr td a.has_item
+    { -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; }
+    #calendar_wrapper .days_wrapper tr td .padding { margin-bottom: 5px; padding: 0px 5px; }
+      #calendar_wrapper .days_wrapper tr td .padding .task { border-bottom: 1px solid #DCDCDC;}        
+      #calendar_wrapper .days_wrapper tr td .padding .task .time { font-size: 11px; font-weight: bold; }

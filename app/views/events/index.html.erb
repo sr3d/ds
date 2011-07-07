@@ -1,0 +1,74 @@
+<% 
+  @date = Date.current
+  @today      = Date.current
+  @start_date = @date.at_beginning_of_month.monday
+  @end_date   = @start_date + 14.days #@date.at_end_of_month.sunday
+
+  date        = @date || Date.current
+  month       = date.month
+  start_date  = @start_date
+  end_date    = @end_date
+  cur_date    = start_date
+  
+  prev_month  = start_date - 1.day
+  next_month  = end_date + 1.day
+
+  collection  = @upcoming_events
+  lookup      = {}
+  
+  collection.each do |item| 
+    lookup[ item.get_date ] ||= []
+    lookup[ item.get_date ] << item if item.get_date
+  end
+%>
+
+<div class="events_page_wrapper">
+  <div class="grid_10">  
+    
+    <% unless @pending_event_invites.empty? %>
+      <%= render :partial => 'pending_invites_confirmation' %>
+    <% end %>
+    
+    <%= render :partial => 'calendar', :locals => { :start_date => start_date, :end_date => end_date, :collection => collection } %>
+  
+    <div class="events_wrapper"  style="margin-bottom: 50px;">
+      <% if @active_events.empty? %>
+        <div class="empty">
+          You don't have any upcoming events.<br/>
+          <a href="#">Add new Event</a>
+        </div>
+      <% else %>
+        <% @active_events.each do |event| %>
+          <div class="event">
+            <a href="<%= event_path(event)%>">
+              <%= event.name %>
+            </a>
+            <br/>
+            <% if event.attendants.empty? %>
+              No one else are attending this event, yet.
+            <% else %>
+              <%= event.attendants.map(&:full_name).join(', ') %> <%= event.attendants.size == 1 ? ' is ' : ' are ' %> going.
+            <% end %>
+          </div><!-- .event -->
+        <% end %>
+      <% end %>
+    
+    </div><!-- .events_wrapper -->
+  
+  
+  </div><!-- .grid_10 -->
+
+
+  <div class="grid_5">
+  
+    <h1><a href="<%= new_event_path %>">New DropSocial Event</a></h1>
+  
+  
+    <div style="width: 150px; height: 180px; border: 1px solid #DCDCDC; margin: 30px auto;padding: 20px; ">
+      Place holder for Feed
+    </div>
+  
+  </div><!-- .grid_5 -->
+
+
+</div><!-- .events_page_wrapper -->

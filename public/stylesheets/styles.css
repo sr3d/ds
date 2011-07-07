@@ -1,0 +1,10 @@
+/*body { background: #ececec url('../images/gradient_bg.png') repeat-x top left; }*/
+
+body { background-color: white; }
+
+a { text-decoration: none; color: #bbbbbb}
+a:hover { color: #666666; }
+.clear { clear: both; zoom: 1}
+.image_button {display: inline-block}
+.image_button span { display: none;}
+

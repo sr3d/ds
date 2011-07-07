@@ -1,0 +1,38 @@
+<div class="grid_10">
+  <h1>Invite Your Friends</h1>
+  
+  
+  <div>
+    
+    <div>
+      Create your friend network by inviting your friends.
+    </div>
+    
+    <!-- Include these scripts to import address books with CloudSponge -->
+    <%= form_tag invite_friends_path, :method => :post do %>
+      <!-- Any link with a class="cs_import" will start the import process -->
+      <a class="cs_import">Add from Address Book</a>
+      <br/>
+
+      <!-- This textarea will be populated with the contacts returned by CloudSponge -->
+      <textarea id="contact_list" name="contact_list" style="width:450px;height:82px"></textarea>
+      <br/>
+      Type in your friends' emails, separated by comma.  E.g. john@appleseed.com, steve@yahoo.com.
+      
+      <p>
+        <%= submit_tag 'Invite' %>
+      </p>
+    <% end %>
+  </div>
+  
+  
+  <%#= form_for :%>
+
+  
+</div><!-- .grid_10 -->
+
+<script type="text/javascript" src="https://api.cloudsponge.com/address_books.js"></script>
+<script type="text/javascript" charset="utf-8">
+var domainKey = "<%= ENV['cloudsponge_domain_key']%>";
+csInit({domain_key: domainKey, textarea_id:'contact_list'});
+</script>

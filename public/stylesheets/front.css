@@ -1,0 +1,45 @@
+body { padding: 0; margin: 0; color: #5f5f5f; text-shadow: white -1px 1px 1px;}
+
+#masthead_wrapper { background: white url('../images/masthead_bg.png') repeat-x top left; height: 80px;}
+#masthead { position: relative; }
+#logo { background: transparent url('../images/logo.png') no-repeat top left; width: 242px; height: 64px; position: absolute; top: 10px; }
+#login_wrapper { position: absolute; right: 0px; width: 500px; top: 30px}
+#login_wrapper .username_wrapper { float: left; width: 120px; }
+#login_wrapper .password_wrapper { float: left; width: 120px; margin-left: 10px; }
+#login_wrapper .submit_wrapper { float: left; width: 120px; margin-left: 10px}
+#login_wrapper input { width: 100px; float: right; margin-right: 10px; }
+#login_wrapper input[type="submit"] { padding: 2px 5px; }
+
+.greeting_wrapper { position: absolute; right: 0px; width: 500px; top: 30px; text-align: right; }
+
+#content_wrapper { background-color: #addced; }
+#main_wrapper {  }
+
+#clouds_wrapper { position: absolute; height: 900px; width: 100%; overflow: hidden;}
+#clouds_wrapper .wrapper { position:relative; height: 100%; display: none;}
+#clouds_wrapper .wrapper .cloud { position: relative; }
+#clouds_wrapper .wrapper .cloud1 { background: url('../images/cloud1.png') no-repeat top left; width: 51px; height: 33px; position: absolute; top: 50px; left: 100px; }
+#clouds_wrapper .wrapper .cloud2 { background: url('../images/cloud2.png') no-repeat top left; width: 34px; height: 23px; position: absolute; top: 120px; left: 30px; }
+#clouds_wrapper .wrapper .cloud3 { background: url('../images/cloud3.png') no-repeat top left; width: 29px; height: 21px; position: absolute; top: 300px; left: 320px; }
+
+
+#content_wrapper { background-color: #addced; padding-top: 30px;}
+#content { position: relative; zoom:1; background: transparent url('../images/opaque_pixel.png') repeat top left; margin-bottom: 30px; border-radius: 10px; border: 2px solid #eae4b7; overflow: hidden;}
+#content { -moz-box-shadow: 3px 3px 4px #747474; -webkit-box-shadow: 3px 3px 4px #747474; box-shadow: 3px 3px 4px #747474;
+  /* For IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#747474')";
+  /* For IE 5.5 - 7 */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#747474');
+}
+
+#content_wrapper #cityscape { background: url('../images/cityscape.png') repeat-x top left; height: 75px}
+
+
+#footer_wrapper { background: white url('../images/footer_bg.png') repeat-x top left; height: 70px; }
+#footer_wrapper #footer { padding-top: 15px; }
+
+#homepage_wrapper #sign_up_form { background: url('../images/4x4pattern.png') repeat top left; width: 346px;}
+#homepage_wrapper #sign_up_form .padding { padding-left: 10px; }
+#homepage_wrapper #sign_up_form form .row { margin: 3px 0px}
+#homepage_wrapper #sign_up_form label { width: 100px; float: left; margin-right: 10px; text-align: right; }
+#homepage_wrapper #sign_up_form input[type="text"], #homepage_wrapper #sign_up_form input[type="password"] { width: 150px; }

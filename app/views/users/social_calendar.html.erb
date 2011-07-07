@@ -1,0 +1,72 @@
+<div class="grid_10">
+  <h1>Social Calendar</h1>
+  
+
+  
+  <div id="calendar">
+    
+  </div><!-- #calendar_wrapper -->
+  
+</div>
+
+
+<div class="grid_6 omega">
+  blah
+</div><!-- .grid_6 omega -->
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var socialableTimes = [];
+  
+  var date = new Date();
+  		var d = date.getDate();
+  		var m = date.getMonth();
+  		var y = date.getFullYear();
+
+  		$('#calendar').fullCalendar({
+  			header: {
+  				left: 'prev,next today',
+  				center: 'title',
+  				right: 'month,agendaWeek,agendaDay'
+  			},
+  			editable: false,
+  			events: [
+  				{
+  					title: 'All Day Event',
+  					start: new Date(y, m, 1)
+  				}
+  				,{
+  					title: 'Kickoff Meeting',
+  					start: new Date(2011, 5, 18)
+  				}
+  			]
+  			
+        // http://arshaw.com/fullcalendar/docs/mouse/dayClick/
+  			,dayClick: function(date, allDay, jsEvent, view) {
+  			  // change the day's background color just for fun
+                  $(this).css('background-color', 'red');
+          // alert('test');
+          // alert('Event: ' + calEvent.title);
+          // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+          // alert('View: ' + view.name);
+          // 
+          // // change the border color just for fun
+          // $(this).css('border-color', 'red');
+        }
+        
+        ,
+  		});
+  
+  
+  
+  // populate with busy time
+  
+  // handle click to popup the time selection box
+  
+  // handle selection
+  
+  // persist selection
+  
+});
+</script>

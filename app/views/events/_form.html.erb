@@ -1,0 +1,85 @@
+<%= semantic_form_for @event do |form| %>
+  <div style="padding-bottom: 20px;">
+    <div class="grid_8">
+      <h2>Event Details</h2>
+      <%= form.inputs do %>
+        <%= form.input :name %>
+        <%= form.input :event_type_id, :as => :select, :collection => EventType.all %>
+        <%= form.input :description, :as => :text %>
+        <%= form.input :venue, :as => :string %>
+      
+        <%= form.input :when, :as => :date, :label => 'Date' %>
+        <%= form.input :start_time, :as => :time %>
+        <%= form.input :end_time, :as => :time %>
+      <% end %>
+      <%= form.buttons do %>
+        <%= form.commit_button %>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+
+    <div class="grid_6">
+      <h1>Who is invited to this event?</h1>
+    
+      <div>
+        <div class="attendant" style="">
+          Check all friends you want to invite
+        </div><!-- .attendant -->
+
+
+        <% current_user.all_friends_and_pending_invites.each do |friend| 
+            if friend.is_a?(Invite)
+              is_invited = @attendant_invite_ids.include?(friend.id)
+              value = if is_invited and attendant = @attendants.select{|a| a.invite_id == friend.id }.first
+                        attendant.id
+                      else
+                        "#{friend.id}-invite"
+                      end
+            else
+              is_invited = @attendant_user_ids.include?(friend.id)
+              value = if is_invited and attendant = @attendants.select{|a| a.user_id == friend.id }.first
+                        attendant.id
+                      else
+                        "#{friend.id}-user"
+                      end
+            end
+        %>
+          <div class="attendant">
+            <label><input type="checkbox" name="attendant_ids[]" value="<%= value %>" <%= is_invited ? :checked : '' %> /> <%= friend.full_name %></label>
+          </div><!-- .attendant -->
+        <% end %>
+      </div>
+    
+      <br/>
+      <br/>
+      <div>
+        Or invite via email <a href="javascript:void(0)" class="cs_import" style="float: right;">Your Address Book</a><br/>
+        <textarea id="contact_list" name="contact_list" style="width:100%;height:100px"></textarea>
+        <br/>
+        (Use commas to separate )
+      </div>
+      <br/>
+    
+      <div class="clear"></div>    
+    </div><!-- .grid_6 omega -->  
+
+  </div>
+
+<% end %>
+
+
+<script type="text/javascript" src="https://api.cloudsponge.com/address_books.js"></script>
+<script type="text/javascript" charset="utf-8">
+var domainKey = "<%= ENV['cloudsponge_domain_key']%>";
+csInit({domain_key: domainKey, 
+  afterSubmitContacts: function(selectedContacts) {
+    /* append to the textarea instead of replacing */
+    var contacts = [];
+    for( var i = 0; i < selectedContacts.length; i++ ) {
+      var fullName = $.trim(selectedContacts[i].fullName()) ? '"' + $.trim(selectedContacts[i].fullName()) + '"' : '';
+      contacts.push( fullName ? ($.trim(fullName + " <" + selectedContacts[i].primaryEmail() + ">")) : selectedContacts[i].primaryEmail() );
+    }
+    $('#contact_list').val(contacts.join(','));
+  }
+});
+</script>

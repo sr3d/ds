@@ -1,0 +1,33 @@
+#error_explanation { background-color: #ffc6c6; padding: 10px; }
+form .row { padding-bottom: 10px}
+form .row .label {float: left; width: 100px; text-align: right; }
+form .row .field { margin-left: 130px }
+
+
+#flash_error, #flash_alert { background-color: #ffc6c6; padding: 10px; margin-top: 10px; }
+#flash_notice { background-color: #c1ffe7; padding: 10px; margin-top: 10px; }
+
+
+
+.image_button {display: inline-block}
+.image_button span { display: none;}
+.clear { clear: both; zoom: 1}
+a { text-decoration: none; color: #05566D; font-weight: bold;}
+h1 { color: #216e7d; font-size: 24px; font-weight: normal; padding: 25px 0px 0px 0px; margin-bottom: 10px;}
+
+form input[type="text"], form input[type="email"], form input[type="password"] { 
+  padding: 5px 10px; border: 1px solid #d4d3ce; color: #1c1c1c; border-radius: 3px;
+  -moz-box-shadow:inset 2px 2px 4px #747474; -webkit-box-shadow:inset 2px 2px 4px #747474; box-shadow:inset 2px 2px 4px #DCDCDC;
+}
+
+form input[type="text"]:focus, form input[type="email"]:focus, form input[type="password"]:focus { border-color: #4bc6fb; }
+
+
+.horizontal_list { padding: 0; margin: 0; }
+.horizontal_list li { display: inline; float: left; margin: 0px}
+
+
+
+
+#nav {margin: 10px;}
+#nav li a { font-size: 18px; padding: 20px; }

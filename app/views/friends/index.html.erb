@@ -1,0 +1,38 @@
+<div class="grid_10">
+  <div class="friends_list_wrapper">
+    <h3>Your Friends</h3>
+    <div>
+      Here's a list of all your friends on DropSocial.
+    </div>
+    
+    <% if current_user.friends.empty? %>
+      <div>
+        You have no friends yet.  <%= link_to 'Invite them now!', invite_friends_path %>
+      </div>
+    <% else %>
+      <ul>
+        <% current_user.friends.each do |friend| %>
+          <li><%= link_to friend.full_name, user_path(friend) %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div><!-- .friends_list_wrapper -->
+
+
+  
+  <div id="pending_invites_wrapper" style="margin-top:20px">
+    <h3>Pending Invitations</h3>
+    
+    <ul>
+      <% current_user.invites.each do |invite| %>
+        <li><%= invite.full_name %></li>
+      <% end %>
+    </ul>
+    
+  </div><!-- #pending_invites_wrapper -->
+  
+</div><!-- .grid_10 -->
+  
+<div class="grid_5">
+  <h1><a href="<%= invite_friends_path %>">Invite Your Friends</a></h1>
+</div><!-- .grid_5 -->

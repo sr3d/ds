@@ -1,0 +1,53 @@
+<% allow_normal_sign_up = false %>
+<div id="homepage_wrapper">
+  <div class="grid_10 ">
+    image here
+    <div class="clear"></div>
+  </div><!-- .grid_10 -->
+
+
+  <div id="sign_up_form" class="grid_6 omega">
+    <div class="padding">
+      <h2><%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %></h2>
+      <br/>
+      <br/>
+
+      <% if allow_normal_sign_up %>
+        <%= form_for(:user, :url => registration_path(:user)) do |f| %>
+
+          <div class="row">
+            <%= f.label :first_name %> <%= f.text_field :first_name %>
+          </div><!-- .row -->
+
+          <div class="row">
+            <%= f.label :last_name %> <%= f.text_field :last_name %>
+          </div>
+        
+          <div class="row">
+            <%= f.label :email %> <%= f.text_field :email %>
+          </div>
+
+          <div class="row">
+            <%= f.label :password %> <%= f.password_field :password %>
+          </div><!-- .row -->
+
+          <div class="row">
+            <%= f.label :password_confirmation %> <%= f.password_field :password_confirmation %>
+          </div><!-- .row -->
+
+
+          <div class="row">
+            <label>I am:</label> <%= f.select :gender, { 'Female' => 'female', 'Male' => 'male'} %>
+          </div><!-- .row -->
+        
+          <div class="row">
+            <label for="">&nbsp;</label> <%= f.submit "Sign up" %>
+          </div><!-- .row -->
+        
+        <% end %>
+      <% end %>
+      
+    </div><!-- .padding -->
+  </div><!-- .grid_6 omega -->
+  
+</div><!-- #homepage_wrapper -->

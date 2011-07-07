@@ -1,0 +1,8 @@
+(function() {
+  var success = <%= current_user.valid? ? :true : :false %>;
+  if(success) {
+    jQuery(document).trigger('close.facebox')
+  } else {
+    alert("Uhm... Couldn't update your email.  Try again, maybe with a different email address");
+  };
+})();

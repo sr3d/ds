@@ -1,0 +1,30 @@
+<% 
+  # if user hasn't confirmed the email address yet, pop up
+  if current_user and not current_user.primary_email_confirmed 
+%>
+  <div id="primary_email_confirmation_wrapper" style="display: none; padding: 10px;">
+    <h3>Is this your primary email?</h3>
+    
+    <div style="padding: 0px 0px 10px 0px">
+      Just to make sure we're on the same page.
+    </div>
+
+    <%= semantic_form_for current_user, :url => confirm_primary_email_users_path, :remote => :true do |f| %>
+      <%= f.inputs do %>
+        <%= f.input :email, :label => 'Email' %>
+        
+        <%= f.buttons do %>
+          <%= f.commit_button 'Save' %>
+        <% end %>      
+      <% end %>
+    <% end %>
+  </div>
+  
+  <script type="text/javascript">
+    (function($) {
+      $(document).ready(function() {
+        $.facebox({ div: '#primary_email_confirmation_wrapper'});
+      })
+    })(jQuery);
+  </script>
+<% end %>

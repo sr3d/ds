@@ -1,0 +1,52 @@
+<% 
+  date        ||= Date.current
+  month       ||= date.month
+  # start_date  ||= date.at_beginning_of_month.monday
+  # end_date    ||= date.at_end_of_month.sunday
+  cur_date    = start_date
+  
+  collection  ||= []
+  lookup      = {}
+  collection.each do |item| 
+    if item.get_date
+      lookup[ item.get_date ] ||= []
+      lookup[ item.get_date ] << item 
+    end
+  end
+%>
+
+<div id="calendar_wrapper">
+  <h1>Your Upcoming Events</h1>
+  
+  <div class="days_wrapper">
+    <table>
+      <tr>
+        <% %w(M T W T F S S).each do |week_day| %>
+          <th><%= week_day %></th>
+        <% end %>
+      </tr>
+      <% while cur_date <= end_date %>
+        <tr>
+          <% 7.times do %>
+            <% css = (cur_date.month != date.month) ? 'other_month' : 'cur_month' %>
+            <% css << ' today' if cur_date == date  %>
+            <% has_item =  lookup[ cur_date ] ? 'has_item ' : ''  %>
+            <td class="<%= css %>">
+              <a href="javascript:void(0)" class="day <%= has_item %>"><%= cur_date.strftime('%d') %></a>
+              <% if lookup [ cur_date ]%>
+                <% lookup[ cur_date ].sort{|a,b| a.start_time <=> b.start_time }.each do |item| %>
+                  <ul>
+                    <li>
+                      <a href="<%= event_path(item)%>"><%= item.name %></a>
+                    </li>
+                  </ul>
+                <% end %>
+              <% end %>
+            </td>
+            <% cur_date = cur_date + 1 %>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
