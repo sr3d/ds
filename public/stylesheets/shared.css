@@ -12,7 +12,7 @@ form .row .field { margin-left: 130px }
 .image_button {display: inline-block}
 .image_button span { display: none;}
 .clear { clear: both; zoom: 1}
-a { text-decoration: none; color: #05566D; font-weight: bold;}
+a { text-decoration: none; color: white; font-weight: bold;}
 h1 { color: #216e7d; font-size: 24px; font-weight: normal; padding: 25px 0px 0px 0px; margin-bottom: 10px;}
 
 form input[type="text"], form input[type="email"], form input[type="password"] { 

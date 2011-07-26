@@ -16,8 +16,6 @@
 %>
 
 <div id="calendar_wrapper">
-  <h1>Your Upcoming Events</h1>
-  
   <div class="days_wrapper">
     <table>
       <tr>
@@ -35,11 +33,14 @@
               <a href="javascript:void(0)" class="day <%= has_item %>"><%= cur_date.strftime('%d') %></a>
               <% if lookup [ cur_date ]%>
                 <% lookup[ cur_date ].sort{|a,b| a.start_time <=> b.start_time }.each do |item| %>
-                  <ul>
-                    <li>
-                      <a href="<%= event_path(item)%>"><%= item.name %></a>
-                    </li>
-                  </ul>
+                  <div style="text-align: right;">
+                    <a href="<%= summary_event_path(item, :format => :js )%>" data-remote="true" id="item_<%= item.id %>">
+                      <%= item.calendar_name %>
+                      <span style="border-bottom: 1px solid #DCDCDC;"><%= item.start_time.strftime('%HH:%MM') if item.start_time %></span>
+                    </a>
+                    
+                  </div>
+                  
                 <% end %>
               <% end %>
             </td>

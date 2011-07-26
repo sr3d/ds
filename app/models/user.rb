@@ -87,7 +87,9 @@ class User < ActiveRecord::Base
   def events_attending
     return @active_events if @active_events
     # my own events
-    @active_events = self.events.active.all 
+    
+    today = Date.today
+    @active_events = self.events.between(today.at_beginning_of_month, today.at_end_of_month)  #self.events.active.all 
     
     # events i'm attending
     @active_events.concat self.attendants.active.all(:include => [:event]).collect{|a| a.event}

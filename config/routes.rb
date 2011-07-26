@@ -42,6 +42,7 @@ Dropsocial::Application.routes.draw do
     member do
       post :update_rsvp
       get  :export_to_calendar
+      get  :summary
     end
   end
   

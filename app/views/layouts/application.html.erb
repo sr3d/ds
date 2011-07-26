@@ -123,6 +123,14 @@
         $('#user-info').html('<img src="' + user.pic_square + '" style="width:35px">').show('fast');
       }
     );
+    
+    
+    FB.api( { method: 'fql.query', query: "select post_fbid, fromid, object_id, text, time from comment where object_id in (select comments_fbid from link_stat where url ='http://google.com')"
+     },
+      function(response) {
+        console.log("response %o",response);
+      }
+    );    
   }
 
   FB.getLoginStatus(handleSessionResponse);

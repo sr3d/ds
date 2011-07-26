@@ -1,8 +1,8 @@
 <% 
   @date = Date.current
   @today      = Date.current
-  @start_date = @date.at_beginning_of_month.monday
-  @end_date   = @start_date + 14.days #@date.at_end_of_month.sunday
+  @start_date = @date.at_beginning_of_month
+  @end_date   = @date.at_end_of_month
 
   date        = @date || Date.current
   month       = date.month
@@ -23,52 +23,92 @@
 %>
 
 <div class="events_page_wrapper">
-  <div class="grid_10">  
-    
-    <% unless @pending_event_invites.empty? %>
-      <%= render :partial => 'pending_invites_confirmation' %>
-    <% end %>
-    
-    <%= render :partial => 'calendar', :locals => { :start_date => start_date, :end_date => end_date, :collection => collection } %>
   
-    <div class="events_wrapper"  style="margin-bottom: 50px;">
-      <% if @active_events.empty? %>
-        <div class="empty">
-          You don't have any upcoming events.<br/>
-          <a href="#">Add new Event</a>
-        </div>
-      <% else %>
-        <% @active_events.each do |event| %>
-          <div class="event">
-            <a href="<%= event_path(event)%>">
-              <%= event.name %>
-            </a>
-            <br/>
-            <% if event.attendants.empty? %>
-              No one else are attending this event, yet.
-            <% else %>
-              <%= event.attendants.map(&:full_name).join(', ') %> <%= event.attendants.size == 1 ? ' is ' : ' are ' %> going.
-            <% end %>
-          </div><!-- .event -->
+  <div class="grid_11 alpha">
+    <div class="module_wrapper">
+      <div class="module_header">
+        <div>Upcoming events</div>
+      </div>
+    
+    
+      <div class="module_padding">
+      
+        <% unless @pending_event_invites.empty? %>
+          <%= render :partial => 'pending_invites_confirmation' %>
         <% end %>
-      <% end %>
     
-    </div><!-- .events_wrapper -->
+        <div class="months_header_wrapper">
+          <div class="months_header">
+            <% today = Date.today
+               year = today.year
+            %>
+            <% for i in 1...12 %>
+              <span>
+                <a href="#" class="<%= :current_month if i == today.month %>"><%= Date.new(year, i, 1).strftime('%b') %></a>
+              </span>
+            <% end %>
+          </div><!-- .months_header -->
+          <div class="new_event">
+            <a href="<%= new_event_path %>" style="color: white; font-size: 10px;">CREATE EVENT +</a>
+          </div>
+          <div class="clear"></div>
+        </div>
+      
+    
+        <%= render :partial => 'calendar', :locals => { :start_date => start_date, :end_date => end_date, :collection => collection } %>
   
+      </div><!-- .padding -->
+    
+      <div class="clear"></div>
+    </div><!-- .module_wrapper -->
   
-  </div><!-- .grid_10 -->
+
+    <div class="module_wrapper">
+      <div class="module_header">
+        <div>Upcoming Events</div>
+      </div><!-- .module_header -->
+
+      <div class="module_padding">
+        <div class="events_wrapper"  style="margin-bottom: 50px;">
+          <% if @active_events.empty? %>
+            <div class="empty">
+              You don't have any upcoming events.<br/>
+              <a href="#">Add new Event</a>
+            </div>
+          <% else %>
+            <% @active_events.each do |event| %>
+              <div class="event">
+                <div class="grid_2">
+                  <%= event.when.strftime('%m %a') %>
+                </div><!-- .grid_2 -->
+                <div class="grid_3">
+                  <%= event.start_time ? event.start_time.strftime('%h:MM') : '' %>
+                </div><!-- .grid_3 -->
+                
+                <div class="grid_4">
+                  <%= link_to event.name, event_path(event) %>
+                </div><!-- .grid_4 -->
+
+              </div><!-- .event -->
+            <% end %>
+          <% end %>
+        </div><!-- .events_wrapper -->
+        <div class="clear"></div>
+      </div><!-- .module_padding -->
+      
+    </div><!-- .module_wrapper -->  
+  
+  </div><!-- .grid_11 -->
 
 
-  <div class="grid_5">
-  
-    <h1><a href="<%= new_event_path %>">New DropSocial Event</a></h1>
-  
-  
-    <div style="width: 150px; height: 180px; border: 1px solid #DCDCDC; margin: 30px auto;padding: 20px; ">
-      Place holder for Feed
+  <div class="grid_5 module_wrapper">
+    <div class="module_header">
+      <div>Social Details</div>
     </div>
+
+    <div id="event_summary" class="module_padding">
+      
+    </div><!-- .module_padding -->
   
   </div><!-- .grid_5 -->
-
-
 </div><!-- .events_page_wrapper -->

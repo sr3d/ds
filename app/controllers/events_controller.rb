@@ -3,7 +3,8 @@ class EventsController < BaseController
 
   def index
     @active_events = current_user.events_attending
-    @upcoming_events = @active_events.collect{|event| event if event.when >= Date.today and event.when <= 2.weeks.from_now }.compact
+    today = Date.today
+    @upcoming_events = @active_events.collect{|event| event if event.when >= today.at_beginning_of_month and event.when <= today.at_end_of_month }.compact
     @pending_event_invites = current_user.attendants.pending.all
   end
   
@@ -16,6 +17,15 @@ class EventsController < BaseController
       render :text => "You can't view this event.", :status => 404
     end
   end
+  
+  def summary
+    if current_user.can_view_event?(@event = Event.find(params[:id]))
+      render :layout => false
+    else
+      render :text => "You can't view this event.", :status => 404
+    end
+  end
+  
 
   def export_to_calendar
     @event = Event.find params[:id]
@@ -36,7 +46,6 @@ class EventsController < BaseController
 
   def new
     @event = Event.new( :when => Date.today )
-    # @all_friends_and_pending_invites = current_user.all_friends_and_pending_invites
     # get all the attendants and create the mapping to lookup
     @attendants = []
     @attendant_user_ids = @attendants.map(&:user_id)
@@ -52,7 +61,6 @@ class EventsController < BaseController
       @event.invite event_attendants
       redirect_to :action => "show", :id => @event.id
     else
-      # @all_friends_and_pending_invites = current_user.all_friends_and_pending_invites
       @attendant_user_ids = []
       @attendant_invite_ids = []
       @attendants = []
@@ -65,7 +73,6 @@ class EventsController < BaseController
           @attendants << Attendant.find(attendant)
         end
       end
-      debugger
       render :action => :new
     end
   end

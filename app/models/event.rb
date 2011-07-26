@@ -70,5 +70,10 @@ class Event < ActiveRecord::Base
     @formatted_time
   end
   
+  def calendar_name
+    return @calendar_name if @calendar_name
+    @calendar_name = name.split(' ').first
+  end
+  
   
 end

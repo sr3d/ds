@@ -1,8 +1,8 @@
-body { padding: 0; margin: 0; color: #5f5f5f; text-shadow: white -1px 1px 1px;}
+body { padding: 0; margin: 0; color: #5f5f5f; /*text-shadow: white -1px 1px 1px; */}
 
 #masthead_wrapper { background: white url('../images/masthead_bg.png') repeat-x top left; height: 80px;}
 #masthead { position: relative; }
-#logo { background: transparent url('../images/logo.png') no-repeat top left; width: 242px; height: 64px; position: absolute; top: 10px; }
+#logo { background: transparent url('../images/logo.png') no-repeat top left; width: 242px; height: 64px; position: absolute; top: 20px; }
 #login_wrapper { position: absolute; right: 0px; width: 500px; top: 30px}
 #login_wrapper .username_wrapper { float: left; width: 120px; }
 #login_wrapper .password_wrapper { float: left; width: 120px; margin-left: 10px; }
@@ -24,13 +24,7 @@ body { padding: 0; margin: 0; color: #5f5f5f; text-shadow: white -1px 1px 1px;}
 
 
 #content_wrapper { background-color: #addced; padding-top: 30px;}
-#content { position: relative; zoom:1; background: transparent url('../images/opaque_pixel.png') repeat top left; margin-bottom: 30px; border-radius: 10px; border: 2px solid #eae4b7; overflow: hidden;}
-#content { -moz-box-shadow: 3px 3px 4px #747474; -webkit-box-shadow: 3px 3px 4px #747474; box-shadow: 3px 3px 4px #747474;
-  /* For IE 8 */
-  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#747474')";
-  /* For IE 5.5 - 7 */
-  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#747474');
-}
+#content { position: relative; zoom:1; }
 
 #content_wrapper #cityscape { background: url('../images/cityscape.png') repeat-x top left; height: 75px}
 
