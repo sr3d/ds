@@ -30,7 +30,7 @@
             <% css << ' today' if cur_date == date  %>
             <% has_item =  lookup[ cur_date ] ? 'has_item ' : ''  %>
             <td class="<%= css %>">
-              <a href="javascript:void(0)" class="day <%= has_item %>"><%= cur_date.strftime('%d') %></a>
+              <span class="day <%= has_item %>"><%= cur_date.strftime('%d') %></span>
               <% if lookup [ cur_date ]%>
                 <% lookup[ cur_date ].sort{|a,b| a.start_time <=> b.start_time }.each do |item| %>
                   <div style="text-align: right;">
