@@ -1,6 +1,6 @@
 <% 
   # if user hasn't confirmed the email address yet, pop up
-  if current_user and not current_user.primary_email_confirmed 
+  if true #|| current_user and not current_user.primary_email_confirmed 
 %>
   <div id="primary_email_confirmation_wrapper" style="display: none; padding: 10px;">
     <h3>Is this your primary email?</h3>

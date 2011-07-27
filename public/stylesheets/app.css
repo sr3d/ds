@@ -60,3 +60,6 @@ a.pink { color: #ec1378 !important }
 .summary_wrapper .row {}
 .summary_wrapper .row .left { float: left; width: 80px; font-weight: bold;}
 .summary_wrapper .row .right { margin-left: 90px; width: 150px; overflow: hidden;}
+
+
+#facebox { color: black; }
