@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   has_many :authentications, :dependent => :destroy
+  has_many :user_secondary_emails, :dependent => :destroy
   has_many :friendships
   has_many :friends, :through => :friendships, :class_name => 'User'
   has_many :invites, :dependent => :destroy
@@ -15,6 +16,26 @@ class User < ActiveRecord::Base
                   :first_name, :last_name, :gender
 
   acts_as_metadata :meta => ['primary_email_confirmed', 'has_invited_friends']
+  
+  class << self
+    
+    # Find the user using both the primary email and the secondary email
+    def find_by_email(email)
+      if user = User.find(:first, :conditions => { :email => email })
+        return user
+      end
+      secondary_email = UserSecondaryEmail.find_by_email(email, :include => :user )
+      return secondary_email.user if secondary_email
+    end
+  end
+  
+  # make sure the primary email isn't saved already in the secondary_email
+  def validate_primary_with_secondary_email
+    if UserSecondaryEmail.find_by_email(email, :conditions => ['user_id != ?', self.id] )
+      errors.add(:email, 'Secondary email have been already taken')
+    end
+  end
+  validate :validate_primary_with_secondary_email
   
   
   def apply_omniauth(omniauth)
@@ -84,18 +105,30 @@ class User < ActiveRecord::Base
     event.user_id == self.id || event.attendants.map(&:user_id).include?(self.id)
   end
   
-  def events_attending
+  def events_attending(date = Date.today)
     return @active_events if @active_events
-    # my own events
-    
-    today = Date.today
-    @active_events = self.events.between(today.at_beginning_of_month, today.at_end_of_month)  #self.events.active.all 
-    
+    @active_events = self.events.between(date.at_beginning_of_month, date.at_end_of_month)
     # events i'm attending
     @active_events.concat self.attendants.active.all(:include => [:event]).collect{|a| a.event}
-    
     @active_events
   end
   
+  def events_attending_between(begin_date, end_date)
+    my_events = self.events.between(begin_date, end_date)
+    invited_events = self.attendants.active.joins(:event).where(['events.when BETWEEN ? AND ?', begin_date, end_date]).map(&:event)
+    my_events.concat invited_events
+  end
+  
+
+  def add_secondary_email(email)
+    email = email.strip.downcase
+    secondary_email = self.user_secondary_emails.new(:email => email)
+    secondary_email.save
+  end
+
+
+
+  # profile image can be called:
+  # http://graph.facebook.com/54500509/picture?type=large
   
 end

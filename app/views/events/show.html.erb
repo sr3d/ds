@@ -7,10 +7,10 @@
         <div><%= @event.name %>'s wall</div>
       </div><!-- .module_header -->
       <div class="module_padding">
-        <div style="background-color: ">
+        <div style="background-color: #DCDCDC">
           <div id="fb-root"></div>
           <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
-          <fb:comments href="<%= event_url(@event) %>" num_posts="15" width="570"></fb:comments>
+          <fb:comments href="<%= event_url(@event) %>" num_posts="15" width="550"></fb:comments>
           <div class="clear"></div>
         </div>
       </div><!-- .module_padding -->
@@ -21,57 +21,22 @@
   <div class="grid_5">
     <div class="module_wrapper">
       <div class="module_header">
-        <div>Social Dtails</div>
+        <div>Social Details</div>
       </div><!-- .module_header -->
       <div class="module_padding">
         
-        <%= render :partial => 'summary' %>
-
-        
-        <div class="row">
-          <div class="grid_2 alpha">
-            &nbsp;
-          </div>
-          <div class="">
-            <%= link_to 'Add to Calendar', export_to_calendar_event_path(@event) %>
-          </div>
-        </div><!-- .row -->
-        
+        <div class="summary_wrapper">
+          <%= render :partial => 'summary' %>
+          
+          <div class="row">
+            <div class="left">&nbsp;</div><!-- .left -->
+            <div class="right"><%= link_to 'Add to Calendar', export_to_calendar_event_path(@event) %></div><!-- .right -->
+          </div><!-- .row -->
+          
+        </div><!-- .summary_wrapper -->
         
       </div><!-- .module_padding -->
     </div><!-- .module_wrapper -->
-
-
-    <div class="logistic_wrapper">
-      <div class="module_wrapper">
-        <div class="module_header">
-          <div>Invited People</div>
-        </div><!-- .module_header -->
-        <div class="module_padding">
-          <% @attendants.group_by(&:rsvp_status).each do |rsvp_status, attendants_by_rsvp_status| %>
-            <div style="font-size: 16px;padding-top: 10px; font-weight: bold; ">
-              <%= rsvp_status.to_s == 'pending' ? 'Waiting for Response' : rsvp_status.to_s.titleize %>
-            </div>
-            <% attendants_by_rsvp_status.each do |attendant| %>
-              <div class="row">
-                <div class="grid_3 alpha">
-                  <% if attendant.is_a?(User) or attendant.user %>
-                    <%= link_to attendant.full_name, (attendant.is_a?(User) ? user_path(attendant) : user_path(attendant.user)) %>
-                  <% else %>
-                    <%= attendant.full_name %>
-                  <% end %>
-                </div>
-                <div class="">
-                </div>
-              </div><!-- .row -->
-            <% end %>
-            <div class="clear"></div>
-          <% end %>          
-        </div><!-- .module_padding -->
-      </div><!-- .module_wrapper -->
-    
-    
-    </div><!-- .logistic_wrapper -->  
   
   </div><!-- .grid_6 -->
 

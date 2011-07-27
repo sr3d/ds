@@ -1,14 +1,14 @@
 <div id="pending_event_invites_wrapper">
-  <h1>Hey, can you confirm this?</h1>
+  <h1>You've got invitations!</h1>
   <% @pending_event_invites.each do |invite| %>
     <div id="attendant_<%= invite.id %>" class="pending_event_invite" style="padding: 10px 0; border-bottom: 1px solid #DCDCDC">
       <span class="event_name" style="font-size: 14px; font-weight: bold;"><%= invite.event.name %> on <%= invite.event.to_formatted_time %></span>
       
       <span style="float: right">
         Are you going? 
-        <%= link_to 'Yes', update_rsvp_event_path(invite.event, :attendant_id => invite.id, :rsvp_status => :attending), :remote => true, :method => :post %> -
-        <%= link_to 'Maybe', update_rsvp_event_path(invite.event, :attendant_id => invite.id, :rsvp_status => :maybe), :remote => true, :method => :post %> -
-        <%= link_to 'No', update_rsvp_event_path(invite.event, :attendant_id => invite.id, :rsvp_status => :not_going), :remote => true, :method => :post %>
+        <%= link_to 'Yes', update_rsvp_event_path(invite.event, :attendant_id => invite.id, :rsvp_status => :attending), :remote => true, :method => :post, :class => 'pink' %> /
+        <%= link_to 'Maybe', update_rsvp_event_path(invite.event, :attendant_id => invite.id, :rsvp_status => :maybe), :remote => true, :method => :post, :class => 'pink' %> /
+        <%= link_to 'No', update_rsvp_event_path(invite.event, :attendant_id => invite.id, :rsvp_status => :not_going), :remote => true, :method => :post, :class => 'pink' %>
       </span>
       <div>
         Who else is going? <%= invite.event.all_attendants.collect{|a| a if a.is_a?(User) or a.user_id != current_user.id }.compact.map(&:full_name).join(', ') %>
@@ -16,3 +16,8 @@
     </div><!-- .pending_event_invite -->
   <% end %>
 </div><!-- #pending_event_invites_wrapper -->
+
+<style type="text/css">
+#pending_event_invites_wrapper { padding: 10px; background-color: #f9ffed; color: black; margin-bottom: 10px; }
+
+</style>

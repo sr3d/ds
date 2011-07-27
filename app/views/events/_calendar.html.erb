@@ -1,8 +1,9 @@
 <% 
   date        ||= Date.current
   month       ||= date.month
-  # start_date  ||= date.at_beginning_of_month.monday
-  # end_date    ||= date.at_end_of_month.sunday
+  start_date  ||= date.at_beginning_of_month.monday
+  end_date    ||= date.at_end_of_month.sunday
+
   cur_date    = start_date
   
   collection  ||= []
@@ -14,7 +15,6 @@
     end
   end
 %>
-
 <div id="calendar_wrapper">
   <div class="days_wrapper">
     <table>
@@ -34,13 +34,11 @@
               <% if lookup [ cur_date ]%>
                 <% lookup[ cur_date ].sort{|a,b| a.start_time <=> b.start_time }.each do |item| %>
                   <div style="text-align: right;">
-                    <a href="<%= summary_event_path(item, :format => :js )%>" data-remote="true" id="item_<%= item.id %>">
+                    <a href="<%= summary_event_path(item, :format => :html )%>" id="item_<%= item.id %>" class="calendar_day">
                       <%= item.calendar_name %>
-                      <span style="border-bottom: 1px solid #DCDCDC;"><%= item.start_time.strftime('%HH:%MM') if item.start_time %></span>
+                      <span style="border-bottom: 1px solid #DCDCDC;"><%= item.start_time.strftime('%l:%M%p') if item.start_time %></span>
                     </a>
-                    
                   </div>
-                  
                 <% end %>
               <% end %>
             </td>

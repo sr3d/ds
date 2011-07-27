@@ -20,6 +20,8 @@ Dropsocial::Application.routes.draw do
   get "authentications/destroy"
 
   get "home/index"
+  match "/invite_facebook_sign_up" => "home#invite_facebook_sign_up"
+  
 
   devise_for :admins
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -39,6 +41,9 @@ Dropsocial::Application.routes.draw do
   end
 
   resources :events do
+    collection do
+      get :social_calendar
+    end
     member do
       post :update_rsvp
       get  :export_to_calendar

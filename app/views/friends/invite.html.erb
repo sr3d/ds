@@ -1,34 +1,33 @@
 <div class="grid_10">
-  <h1>Invite Your Friends</h1>
+  <div class="module_wrapper">
+    <div class="module_header">
+      <div>Invite Your Friends</div>
+    </div><!-- .module_header -->
+    <div class="module_padding">
   
   
-  <div>
+      <div>
+        Create your friend network on DropSocial by inviting your friends.
+      </div>
     
-    <div>
-      Create your friend network by inviting your friends.
-    </div>
-    
-    <!-- Include these scripts to import address books with CloudSponge -->
-    <%= form_tag invite_friends_path, :method => :post do %>
-      <!-- Any link with a class="cs_import" will start the import process -->
-      <a class="cs_import">Add from Address Book</a>
-      <br/>
+      <!-- Include these scripts to import address books with CloudSponge -->
+      <%= form_tag invite_friends_path, :method => :post do %>
+        <!-- Any link with a class="cs_import" will start the import process -->
+        <a class="cs_import">Add from Address Book</a>
+        <br/>
 
-      <!-- This textarea will be populated with the contacts returned by CloudSponge -->
-      <textarea id="contact_list" name="contact_list" style="width:450px;height:82px"></textarea>
-      <br/>
-      Type in your friends' emails, separated by comma.  E.g. john@appleseed.com, steve@yahoo.com.
+        <!-- This textarea will be populated with the contacts returned by CloudSponge -->
+        <textarea id="contact_list" name="contact_list" style="width:450px;height:82px"></textarea>
+        <br/>
+        Type in your friends' emails, separated by comma.  E.g. john@appleseed.com, steve@yahoo.com.
       
-      <p>
-        <%= submit_tag 'Invite' %>
-      </p>
-    <% end %>
-  </div>
-  
-  
-  <%#= form_for :%>
-
-  
+        <p>
+          <%= submit_tag 'Invite' %>
+        </p>
+      <% end %>
+    </div><!-- .module_padding -->
+  </div><!-- .module_wrapper -->    
+    
 </div><!-- .grid_10 -->
 
 <script type="text/javascript" src="https://api.cloudsponge.com/address_books.js"></script>

@@ -18,4 +18,11 @@ describe User do
     end
   end
   
+  describe 'with secondary emails' do
+    it 'should add new secondary_email' do
+      secondary_email = Factory.next(:email)
+      lambda { @user.add_secondary_email secondary_email }.should change(UserSecondaryEmail, :count).by(1)
+    end
+  end
+  
 end

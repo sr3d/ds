@@ -31,8 +31,22 @@
           </div>
         <% end %>
       <% else %>
+      
+        <% if current_user %>
+          <div id="nav_wrapper" class="">
+            <ul id="nav" class="horizontal_list">
+              <li><a href="/events">Events</a></li>
+              <li><a href="/friends">Friends</a></li>
+              <li><a href=""></a></li>
+            </ul>
+            <div class="clear"></div>
+          </div><!-- #menu_wrapper -->
+          <div class="clear"></div> 
+        <% end %>
+      
+      
         <div class="greeting_wrapper">
-          Hello <%= current_user.full_name %> <span id="user-info"></span>.  <%= link_to 'Sign Out', destroy_user_session_path %>
+          Hello <%= current_user.full_name %> <span id="user-info"></span>  <%= link_to 'Sign Out', destroy_user_session_path, :class => 'pink' %>
         </div><!-- .greeting_wrapper -->
       <% end %>
       
@@ -50,19 +64,6 @@
   <!-- todo: flash mssg here -->
 
   <div class="container_16">
-    <% if current_user %>
-      <div id="nav_wrapper" class="">
-        <ul id="nav" class="horizontal_list">
-          <li><a href="/events">Events</a></li>
-          <li><a href="/friends">Friends</a></li>
-          <li><a href=""></a></li>
-        </ul>
-        <div class="clear"></div>
-      </div><!-- #menu_wrapper -->
-      <div class="clear"></div> 
-    <% end %>
-
-    
     <div id="content">
       <%= yield %>
       <div class="clear"></div>
@@ -123,14 +124,6 @@
         $('#user-info').html('<img src="' + user.pic_square + '" style="width:35px">').show('fast');
       }
     );
-    
-    
-    FB.api( { method: 'fql.query', query: "select post_fbid, fromid, object_id, text, time from comment where object_id in (select comments_fbid from link_stat where url ='http://google.com')"
-     },
-      function(response) {
-        console.log("response %o",response);
-      }
-    );    
   }
 
   FB.getLoginStatus(handleSessionResponse);

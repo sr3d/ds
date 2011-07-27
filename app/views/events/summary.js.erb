@@ -1,5 +1,0 @@
-var html = "<%= escape_javascript render(:partial => 'summary')%>";
-var eventId = '<%= @event.id %>';
-$('#event_summary').html(html);
-$('.current_item').removeClass('current_item');
-$('#item_' + eventId).addClass('current_item');

@@ -1,0 +1,45 @@
+<% 
+  @date     ||= Date.current
+  @today      = Date.current
+  @start_date = @date.at_beginning_of_month.monday
+  @end_date   = @date.at_end_of_month.sunday
+  @year       = @date.year
+
+  collection  = @active_events
+  lookup      = {}
+  
+  collection.each do |item| 
+    lookup[ item.get_date ] ||= []
+    lookup[ item.get_date ] << item if item.get_date
+  end
+%>
+<div class="months_header_wrapper">
+  <div class="months_header">
+    <% for i in 1..12 %>
+      <span>
+        <a href="<%= social_calendar_events_path(:month=> i, :year => @year) %>" class="<%= :current_month if i == @date.month %> calendar_month"><%= Date.new(@year, i, 1).strftime('%b') %></a>
+      </span>
+    <% end %>
+  </div><!-- .months_header -->
+  <div class="new_event">
+    <a href="<%= new_event_path %>" style="color: white; font-size: 10px;">CREATE EVENT +</a>
+  </div>
+  <div class="clear"></div>
+</div>
+
+
+<%= render :partial => 'calendar', :locals => { :start_date => @start_date, :end_date => @end_date, :collection => collection } %>
+
+
+<script type="text/javascript">
+/* Ajax in the social details */
+$('a.calendar_day').click(function() {
+  $('#event_summary').load(this.href);
+  return false;
+});
+
+$('a.calendar_month').click(function() {
+  $('#social_calendar_wrapper').load(this.href);
+  return false;
+})
+</script>

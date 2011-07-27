@@ -1,0 +1,20 @@
+<div class="summary_wrapper">
+  <%= render(:partial => 'summary') %>
+  <div class="row">
+    <div class="left grid_2 alpha">
+      <strong>WALL</strong>
+    </div>
+    <div class="right">
+      <a href="<%= event_path(@event) %>" class="purple_link">GO TO FULL WALL</a>
+    </div>
+  </div><!-- .row -->
+
+</div><!-- .summary_wrapper -->
+
+
+
+<script type="text/javascript">
+var eventId = '<%= @event.id %>';
+$('.current_item').removeClass('current_item');
+$('#item_' + eventId).parent().addClass('current_item');  
+</script>

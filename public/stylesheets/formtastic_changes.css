@@ -12,7 +12,7 @@ The following style may be *conditionally* included for improved support on olde
 form.formtastic fieldset ol li fieldset legend { margin-left: -6px;}
 
 --------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li label { color: #aaaaaa; font-weight: bold; width: 20%; }
+form.formtastic fieldset > ol > li label { color: white; font-weight: bold; width: 20%; font-size: 11px; text-transform: uppercase; }
 form.formtastic fieldset > ol > li { margin-bottom: 0px; }
 form.formtastic fieldset > ol > li fieldset ol { padding: 0 0 0 20%}
 form.formtastic fieldset input[type="text"] { border: 1px solid #dcdcdc; padding: 5px; width: 100%}
@@ -20,4 +20,10 @@ form.formtastic a { color: #aaaaaa }
 form.formtastic a:hover { font-weight: bold; }
 
 
+
 form.formtastic fieldset { overflow: hidden;} /* override the scrollbar, should clear...*/
+
+form.formtastic fieldset.buttons { padding-left: 20%; }
+form.formtastic .commit {float: right;}
+form.formtastic .create, input[type="submit"] {color: white; background-color: #AC13EC; border: 1px solid white; padding: 5px 10px !important; text-transform: uppercase;}
+

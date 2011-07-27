@@ -4,9 +4,19 @@ class EventsController < BaseController
   def index
     @active_events = current_user.events_attending
     today = Date.today
-    @upcoming_events = @active_events.collect{|event| event if event.when >= today.at_beginning_of_month and event.when <= today.at_end_of_month }.compact
+    @upcoming_events = current_user.events_attending_between(today,14.days.from_now)
     @pending_event_invites = current_user.attendants.pending.all
   end
+  
+  
+  # GET social_calendar.html
+  # the calendar's ajax month switch
+  def social_calendar
+    @date = Date.new(params[:year].to_i, params[:month].to_i, 1)
+    @active_events = current_user.events_attending(@date)
+    render :layout => false
+  end
+  
   
   def show
     @event = Event.find params[:id]
@@ -18,8 +28,11 @@ class EventsController < BaseController
     end
   end
   
+  
   def summary
     if current_user.can_view_event?(@event = Event.find(params[:id]))
+      @attendants = @event.attendants
+      @attendants = [@event.user] + @attendants
       render :layout => false
     else
       render :text => "You can't view this event.", :status => 404
@@ -33,7 +46,6 @@ class EventsController < BaseController
       @calendar = Icalendar::Calendar.new
       event = Icalendar::Event.new
       event.start = @event.when.strftime("%Y%m%dT%H%M%S")
-      # event.end = @event.dt_time.strftime("%Y%m%dT%H%M%S")
       event.summary = @event.name
       event.description = @event.description
       event.location = @event.venue

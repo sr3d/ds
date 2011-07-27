@@ -1,4 +1,11 @@
 (function() {
   var attendantId = '<%= @attendant.id %>';
-  $('#attendant_' + attendantId).fadeOut();
+  $('#attendant_' + attendantId).fadeOut(300, function() { 
+    $(this).remove(); 
+    // remove the wrapper if it's empty
+    if($('#pending_event_invites_wrapper .pending_event_invite').length == 0){
+      $('#pending_event_invites_wrapper').remove();
+    }
+  });
+
 })();

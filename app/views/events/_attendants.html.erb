@@ -1,0 +1,26 @@
+<% @attendants.group_by(&:rsvp_status).each do |rsvp_status, attendants_by_rsvp_status| %>
+  <div class="row">
+    <div class="left" style="">
+      <%= case rsvp_status.to_s 
+          when 'not_going'  then 'OUT'
+          when 'attending'  then 'IN'
+          when 'maybe'      then 'MAYBE'
+          else 'WAITING'
+          end
+      %>
+    </div>
+    <div class="right" style="overflow: hidden; ">
+      <% attendants_by_rsvp_status.each do |attendant| %>
+        <div>
+          <% if attendant.is_a?(User) or attendant.user %>
+            <%= link_to attendant.full_name, (attendant.is_a?(User) ? user_path(attendant) : user_path(attendant.user)) %>
+          <% else %>
+            <%= attendant.full_name %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="clear"></div>
+  </div><!-- .row -->
+
+<% end %>

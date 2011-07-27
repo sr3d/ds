@@ -46,6 +46,19 @@ describe Invite do
       @user.friends.should include @friend
       @friend.friends.should include @user
     end
+    
+    it 'should friend existing user using secondary email automatically' do
+      @friend = Factory(:user)
+      secondary_email = Factory.next(:email)
+      @friend.add_secondary_email secondary_email
+      lambda { 
+        lambda { Invite.build_and_create_invite(secondary_email, @user) }.should_not change(Invite,:count)
+      }.should change(Friendship, :count).by(2)
+      @user.friends.reload
+      @user.friends.should include @friend
+      @friend.friends.should include @user
+    end
+    
   end
   
 end
