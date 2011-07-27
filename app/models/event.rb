@@ -65,7 +65,7 @@ class Event < ActiveRecord::Base
   
   def to_formatted_time
     return @formatted_time if @formatted_time
-    @formatted_time = (self.when ? self.when.strftime('%B %d, %y') : 'No Date Specified')
+    @formatted_time = (self.when ? self.when.strftime('%B %d') : 'No Date Specified')
     @formatted_time << " at " << (self.start_time ? self.start_time.strftime('%l:%M%p') : 'No Time Specified')
     @formatted_time
   end
