@@ -48,6 +48,7 @@ class EventsController < BaseController
       start = @event.when.strftime("%Y%m%dT") #
       start << @event.start_time.strftime('%H%M%S') if @event.start_time
       event.start = start
+      
       event.summary = @event.name
       event.description = @event.description
       event.location = @event.venue

@@ -16,8 +16,9 @@
     <strong>WHEN</strong> 
   </div>
   <div class="right">
-    <%= @event.when ? @event.when.strftime('%B %d, %y') : 'No Date Specified' %> - 
+    <%= @event.when ? @event.when.strftime('%B %d') : 'No Date Specified' %>, 
     <%= @event.start_time ? @event.start_time.strftime('%H:%M') : 'No Time Specified' %>
+    <%= @event.end_time ? @event.end_time.strftime('-%H:%M') : 'No Time Specified' %>
   </div>
 </div><!-- .row -->
 
