@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :invites, :dependent => :destroy
   has_many :events, :dependent => :destroy
   has_many :attendants, :dependent => :destroy
-
+  has_many :comments, :dependent => :destroy
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :first_name, :last_name, :gender
@@ -18,7 +18,6 @@ class User < ActiveRecord::Base
   acts_as_metadata :meta => ['primary_email_confirmed', 'has_invited_friends']
   
   class << self
-    
     # Find the user using both the primary email and the secondary email
     def find_by_email(email)
       if user = User.find(:first, :conditions => { :email => email })
@@ -127,6 +126,11 @@ class User < ActiveRecord::Base
   end
 
 
+  def profile_image_url
+    return @profile_image_url if @profile_image_url 
+    facebook_uid = authentications.select{ |a| a.provider == 'facebook' }.first.uid
+    @profile_image_url = "http://graph.facebook.com/#{facebook_uid}/picture?type=square"
+  end
 
   # profile image can be called:
   # http://graph.facebook.com/54500509/picture?type=large

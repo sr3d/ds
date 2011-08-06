@@ -23,6 +23,11 @@ class EventsController < BaseController
     if current_user.can_view_event? @event
       @attendants = @event.attendants
       @attendants = [@event.user] + @attendants
+      # @comments - @event.comments.latest(50)
+      @comments = Comment.where(:event_id => @event.id).all(:include => {:user => :authentications}) #@event.comments.order('comments.id DESC').limit(20).all
+      
+      # Post.where(:published => true).paginate(:page => params[:page]).order('id DESC')
+      
     else
       render :text => "You can't view this event.", :status => 404
     end
@@ -45,9 +50,11 @@ class EventsController < BaseController
     if current_user.can_view_event? @event
       @calendar = Icalendar::Calendar.new
       event = Icalendar::Event.new
-      start = @event.when.strftime("%Y%m%dT") #
+      event.uid = @event.ical_unique_id
+      start = @event.when.strftime("%Y%m%dT")
       start << @event.start_time.strftime('%H%M%S') if @event.start_time
       event.start = start
+      event.dtend = (@event.when.strftime("%Y%m%dT") << @event.end_time.strftime('%H%M%S')) if @event.end_time
       
       event.summary = @event.name
       event.description = @event.description

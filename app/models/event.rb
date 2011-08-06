@@ -1,8 +1,10 @@
+require "digest/sha1"
 class Event < ActiveRecord::Base
   belongs_to :event_type
   belongs_to :user
   
   has_many :attendants, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
   
   validates_presence_of :name
   validates_numericality_of :user_id
@@ -12,6 +14,10 @@ class Event < ActiveRecord::Base
   scope :current_month, between( Date.current.at_beginning_of_month, Date.current.at_end_of_month)
   scope :active, where( ['events.when >= ?', Date.today] )
   
+  # used for calendar
+  def ical_unique_id
+    ::Digest::SHA1.hexdigest('--dropsocial--' << self.id << '--')    
+  end
 
   # used for calendar 
   def get_date

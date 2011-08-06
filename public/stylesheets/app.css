@@ -63,3 +63,11 @@ a.pink { color: #ec1378 !important }
 
 
 #facebox { color: black; }
+
+#new_comment_wrapper { padding: 10px 0px; margin-top: 10px; }
+#new_comment_wrapper form textarea {width: 555px; }
+
+.comments_wrapper {}
+.comments_wrapper .comment_wrapper { padding: 20px 0px;}
+.comments_wrapper .comment_wrapper .profile_image { float: left; width: 50px; height: 50px; }
+.comments_wrapper .comment_wrapper .comment_comment { margin-left: 60px; }

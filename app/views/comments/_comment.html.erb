@@ -1,0 +1,12 @@
+<div class="comment_wrapper">
+  <div class="profile_image">
+    <%= image_tag comment.user.profile_image_url %>
+    <%= comment.user.full_name %>
+  </div><!-- .avatar -->
+  <div class="comment_comment">
+    <%= comment.comment %>
+    <br/>
+    <span class="date"><%= comment.created_at.strftime('%b %M') %></span>
+  </div><!-- .text -->
+  <div class="clear"></div>
+</div><!-- .comment_wrapper -->

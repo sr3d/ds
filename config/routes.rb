@@ -1,4 +1,10 @@
 Dropsocial::Application.routes.draw do
+  # get "comments/create"
+  # 
+  # get "comments/update"
+  # 
+  # get "comments/destroy"
+
   # get "friends/index"
   # 
   # get "friends/invite"
@@ -49,6 +55,11 @@ Dropsocial::Application.routes.draw do
       get  :export_to_calendar
       get  :summary
     end
+    
+    resources :comments do
+      #
+    end
+    
   end
   
   # The priority is based upon order of creation:

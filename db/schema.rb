@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110727012640) do
+ActiveRecord::Schema.define(:version => 20110805192353) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -52,6 +52,17 @@ ActiveRecord::Schema.define(:version => 20110727012640) do
 
   add_index "authentications", ["provider", "uid"], :name => "index_authentications_on_provider_and_uid", :unique => true
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["event_id"], :name => "index_comments_on_event_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "event_types", :force => true do |t|
     t.string   "name"

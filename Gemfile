@@ -51,3 +51,4 @@ gem 'will_paginate', '~> 3.0.beta'
 gem 'icalendar'
 
 gem 'formtastic'
+gem 'will_paginate', '~> 3.0.pre4'
