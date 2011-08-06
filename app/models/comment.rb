@@ -10,7 +10,7 @@ class Comment < ActiveRecord::Base
   
   after_create :notify_all_active_attendants
   def notify_all_active_attendants
-    event.
+    # event.
   end
   
 end
