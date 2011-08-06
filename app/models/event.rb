@@ -67,7 +67,7 @@ class Event < ActiveRecord::Base
   def all_attendants
     self.attendants.to_a + [self.user]
   end
-  
+   
   
   def to_formatted_time
     return @formatted_time if @formatted_time

@@ -8,4 +8,9 @@ class Comment < ActiveRecord::Base
     order(:id => :desc).limit(number_of_comments)
   end
   
+  after_create :notify_all_active_attendants
+  def notify_all_active_attendants
+    event.
+  end
+  
 end
