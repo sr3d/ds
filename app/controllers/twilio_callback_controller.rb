@@ -10,7 +10,7 @@ class TwilioCallbackController < ApplicationController
           xml = <<-XML
           <Response>
             <Say>Please leave a message at the beep.  Press the hash or pound key when finished.</Say>
-            <Record action="/twilio_callback/receive_voice_recording.xml" method="GET" maxLength="20" finishOnKey="#" />
+            <Record action="/twilio_callback/receive_voice_recording.xml" method="GET" maxLength="60" finishOnKey="#" />
             <Say>I did not receive any recording.  Please try again.</Say>
           </Response>
           XML
@@ -62,8 +62,9 @@ class TwilioCallbackController < ApplicationController
       format.xml do
         xml = <<-XML
         <Response>
-          <Say>Awesome!  Your voice interview has been saved.</Say>
-          <Say>Thank you!</Say>
+          <Gather action="/twilio_callback/index.xml" method="GET" numDigits="#">
+            <Say>Awesome!  Your voice interview has been saved. Hit Hash or Pound to return to the index page.</Say>
+          </Gather>          
         </Response>
         XML
         render :text => xml
