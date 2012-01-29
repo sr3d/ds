@@ -40,6 +40,10 @@ GEM
       activemodel (= 3.0.7)
       activesupport (= 3.0.7)
     activesupport (3.0.7)
+    acts_as_api (0.3.11)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      rack (>= 1.1.0)
     addressable (2.2.4)
     archive-tar-minitar (0.5.2)
     arel (2.0.10)
@@ -205,6 +209,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  acts_as_api
   autotest
   autotest-fsevent
   autotest-rails
@@ -219,7 +224,6 @@ DEPENDENCIES
   omniauth
   rails (= 3.0.7)
   rails_admin!
-  rake (= 0.8.7)
   rspec-rails (>= 2.0.1)
   ruby-debug19
   webrat
