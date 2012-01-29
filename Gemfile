@@ -41,6 +41,11 @@ group :development, :test do
   gem "rspec-rails", ">= 2.0.1"
 end
 
+
+source :gemcutter
+gem 'sinatra', '1.0'
+gem 'haml'
+gem 'haml-rails'
 gem "twilio-ruby"
 gem "omniauth"
 gem "devise"
