@@ -15,7 +15,7 @@ class InterviewsController < ApplicationController
   def destroy
     @interview = Interview.find params[:id]
     @interview.destroy
-    redirect_to event_path @event.id
+    redirect_to event_path params[:event_id]
   end
 
 
