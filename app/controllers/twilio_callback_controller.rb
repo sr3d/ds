@@ -10,7 +10,7 @@ class TwilioCallbackController < ApplicationController
           xml = <<-XML
           <Response>
             <Say>Please leave a message at the beep.  Press the hash or pound key when finished.</Say>
-            <Record action="/twilio_callback/receive_voice_recording.xml" method="GET" maxLength="60" finishOnKey="#" />
+            <Record action="/twilio_callback/receive_voice_recording.xml" method="GET" maxLength="300" finishOnKey="#" />
             <Say>I did not receive any recording.  Please try again.</Say>
           </Response>
           XML
