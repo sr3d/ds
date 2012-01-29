@@ -69,7 +69,7 @@ Dropsocial::Application.routes.draw do
       #
     end
     
-    resources :interviews, :only => [:show]
+    resources :interviews #, :only => [:show]
     
   end
   

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120129085842) do
+ActiveRecord::Schema.define(:version => 20120129104425) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20120129085842) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "audio_id"
+    t.integer  "video_id"
   end
 
   add_index "interviews", ["user_id"], :name => "index_interviews_on_user_id"
@@ -199,5 +200,19 @@ ActiveRecord::Schema.define(:version => 20120129085842) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "videos", :force => true do |t|
+    t.integer  "interview_id"
+    t.text     "url"
+    t.text     "title"
+    t.text     "description"
+    t.text     "location"
+    t.text     "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "video_id"
+  end
+
+  add_index "videos", ["interview_id"], :name => "index_videos_on_interview_id"
 
 end

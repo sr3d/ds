@@ -14,10 +14,7 @@
             <% if interview.audio? %>
               <div class="audio_wrapper">
                 Audio recording by <%= interview.user.full_name %>:  <a href="<%= interview.url %>" target="_blank">Play</a>
-                <!-- <div class="ui360">
-                  <a href="<%= interview.url %>">play</a>
-                </div> -->
-                <div id="audio_<%= interview.id %>" class="mp3_audio"></div>
+                <div>Posted <%= time_ago_in_words interview.created_at %> ago</div>
                 <div class=""><a href="<%= event_interview_path(@event, interview.id) %>">Engage In Discussion</a></div>
               </div>
             <% else %>

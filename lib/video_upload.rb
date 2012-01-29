@@ -1,10 +1,15 @@
+require 'REXML'
 class YouTubeG
   module Upload
     class UploadError < Exception; end
 
     class VideoUpload
       def initialize
-        @config = YAML::load(File.open("#{::Rails.root.to_s}/config/config.yml"))
+        # @config = ENV #YAML::load(File.open("#{::Rails.root.to_s}/config/config.yml"))
+      end
+      
+      def config
+        ENV
       end
 
       def upload data, ad, opts = {}
@@ -27,7 +32,7 @@ class YouTubeG
       private
       def init_options(data, ad, opts)
         title = Time.now.to_f.to_s
-        description = CGI::escape "#{ad.location.full_address} #{ad.category.name} #{ad.sub_category.name}\n"
+        description = "another interview #{Time.now} "#CGI::escape "#{ad.location.full_address} #{ad.category.name} #{ad.sub_category.name}\n"
 
         @opts = { 
           :mime_type => 'video/mp4',
@@ -35,7 +40,7 @@ class YouTubeG
           :title => title,
           :description => description,
           :category => 'People',
-          :keywords => %w(reachoo ad) }.merge(opts)
+          :keywords => %w(dschool) }.merge(opts)
           puts @opts.inspect
       end
 
@@ -53,8 +58,8 @@ class YouTubeG
       def upload_header(data)
         {
           "Authorization"  => "GoogleLogin auth=#{auth_token}",
-          "X-GData-Client" => "#{@config['youtube_password']}",
-          "X-GData-Key"    => "key=#{@config['youtube_dev_key']}",
+          "X-GData-Client" => "#{ENV['youtube_password']}",
+          "X-GData-Key"    => "key=#{ENV['youtube_dev_key']}",
           "Slug"           => "#{@opts[:filename]}",
           "Content-Type"   => "multipart/related; boundary=#{boundary}",
           "Content-Length" => "#{upload_body(data)}"
@@ -79,7 +84,7 @@ class YouTubeG
       def auth_token
         http = Net::HTTP.new("www.google.com", 443)
         http.use_ssl = true
-        body = "Email=#{CGI::escape @config['youtube_login']}&Passwd=#{CGI::escape @config['youtube_password']}&service=youtube&source=#{CGI::escape @config['youtube_password']}"
+        body = "Email=#{CGI::escape ENV['youtube_login']}&Passwd=#{CGI::escape ENV['youtube_password']}&service=youtube&source=#{CGI::escape ENV['youtube_password']}"
         response = http.post("/youtube/accounts/ClientLogin", body, "Content-Type" => "application/x-www-form-urlencoded")
         raise UploadError, response.body[/Error=(.+)/,1] if response.code.to_i != 200
         response.body[/Auth=(.+)/, 1]

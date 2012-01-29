@@ -1,2 +1,100 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<h1>Edit</h1>
+
+<div style="padding-bottom: 20px">
+  <%= semantic_form_for current_user do |form| %>
+    <div style="padding-bottom: 20px;">
+      <div class="grid_8">
+        <div class="module_wrapper">
+          <div class="module_header">
+            <div>Edit User</div>
+          </div><!-- .module_header -->
+          <div class="module_padding">
+            <%= form.inputs do %>
+              <%= form.input :name %>
+              <%= form.input :venue, :as => :string %>
+
+              <%= form.input :when, :as => :date, :label => 'Date' %>
+              <%= form.input :start_time, :as => :time %>
+              <%= form.input :end_time, :as => :time %>
+              <%= form.input :description, :as => :text, :input_html => {:rows => 10} %>
+            <% end %>
+            <%= form.buttons do %>
+              <%= form.commit_button %>
+            <% end %>
+          </div><!-- .module_padding -->
+        </div><!-- .module_wrapper -->
+
+        <div class="clear"></div>
+      </div>
+
+      <div class="grid_7 prefix_1">
+        <div class="module_wrapper">
+          <div class="module_header">
+            <div>Who is invited to this event?</div>
+          </div><!-- .module_header -->
+          <div class="module_padding">
+            <% current_user.all_friends_and_pending_invites.each do |friend| 
+                if friend.is_a?(Invite)
+                  is_invited = @attendant_invite_ids.include?(friend.id)
+                  value = if is_invited and attendant = @attendants.select{|a| a.invite_id == friend.id }.first
+                            attendant.id
+                          else
+                            "#{friend.id}-invite"
+                          end
+                else
+                  is_invited = @attendant_user_ids.include?(friend.id)
+                  value = if is_invited and attendant = @attendants.select{|a| a.user_id == friend.id }.first
+                            attendant.id
+                          else
+                            "#{friend.id}-user"
+                          end
+                end
+            %>
+              <div class="attendant">
+                <label><input type="checkbox" name="attendant_ids[]" value="<%= value %>" <%= is_invited ? :checked : '' %> /> <%= friend.full_name %></label>
+              </div><!-- .attendant -->
+            <% end %>
+
+
+            <br/>
+            <br/>
+            <div>
+              Or invite via email:
+              <br/>Type in your friends' emails, separated by commas
+              (i.e. jogn@gmail.com, mary@gmail.com) or 
+              <a href="javascript:void(0)" class="cs_import pink" style="">Add from Your Address Book</a><br/>
+              <textarea id="contact_list" name="contact_list" style="width:100%;height:100px"></textarea>
+            </div>
+            <br/>
+
+          </div>
+
+          <div class="clear"></div>          
+          </div><!-- .module_padding -->
+
+        </div><!-- .module_wrapper -->
+      </div><!-- .grid_7 omega -->  
+
+      <div class="clear"></div>
+    </div>
+
+  <% end %>
+  
+</div>
+
+
+<script type="text/javascript" src="https://api.cloudsponge.com/address_books.js"></script>
+<script type="text/javascript" charset="utf-8">
+var domainKey = "<%= ENV['cloudsponge_domain_key']%>";
+csInit({domain_key: domainKey, 
+  afterSubmitContacts: function(selectedContacts) {
+    /* append to the textarea instead of replacing */
+    var contacts = [];
+    for( var i = 0; i < selectedContacts.length; i++ ) {
+      var fullName = $.trim(selectedContacts[i].fullName()) ? '"' + $.trim(selectedContacts[i].fullName()) + '"' : '';
+      contacts.push( fullName ? ($.trim(fullName + " <" + selectedContacts[i].primaryEmail() + ">")) : selectedContacts[i].primaryEmail() );
+    }
+    $('#contact_list').val(contacts.join(','));
+  }
+});
+</script>

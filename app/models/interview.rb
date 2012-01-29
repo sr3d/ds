@@ -1,8 +1,7 @@
 class Interview < ActiveRecord::Base
   belongs_to :user  
   belongs_to :audio
-  
-  # belongs_to :video
+  belongs_to :video
   # belongs_to :photos
   # belongs_to :text
     

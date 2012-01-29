@@ -1,20 +1,20 @@
 require 'video_upload'
 
-class AdVideo < ActiveRecord::Base
+class Video < ActiveRecord::Base
   AVAILABLE_MIME_TYPES = ['video/quicktime', 'video/mpeg', 'video/x-msvideo', 'video/mp4', 'video/mpeg4', 'video/x-ms-asf', 'video/x-ms-wmv', 'video/x-flv']
-  
-  belongs_to :interview
-  
 
-  
-  # Validations
-  validates_attachment_content_type :video, 
-                                    :content_type => AVAILABLE_MIME_TYPES,
-                                    :message => 'Video file must have an extension .mov, .mp4, or .avi.'
-  validates_attachment_size :video, :in => 1..512.megabyte
-  
-  attr_protected :video_file_name, :video_content_type, :video_size
-  attr_accessor :file_data
+  attr_accessible :description, :interview_id, :user_id
+
+
+  def self.create_from_params params, user
+    # debugger
+    file = IO.read(params[:video].path)
+    client = YouTubeG::Upload::VideoUpload.new
+    youtube_code = client.upload file, nil
+    video = Video.create :video_id => youtube_code, :url => "http://", :user_id => user.id
+    interview = Interview.new :user_id => user.id, :video => video
+    interview  # BLAH!  blaspheme!
+  end
 
   before_create :upload_to_youtube
   def upload_to_youtube

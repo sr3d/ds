@@ -46,7 +46,9 @@
       
       
         <div class="greeting_wrapper">
-          Hello <%= current_user.full_name %> <span id="user-info"></span>  <%= link_to 'Sign Out', destroy_user_session_path, :class => 'pink' %>
+          Hello <%= current_user.full_name %> <span id="user-info"></span>  
+          <%= link_to '[Update]', edit_user_path(current_user), :class => 'pink' %>
+          <%= link_to 'Sign Out', destroy_user_session_path, :class => 'pink' %>
         </div><!-- .greeting_wrapper -->
       <% end %>
       
