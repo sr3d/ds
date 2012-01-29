@@ -3,7 +3,7 @@
   <div class="grid_11 alpha">
     <div class="module_wrapper">
       <div class="module_header">
-        <div>Your Social Calendar</div>
+        <div>Your Calendar</div>
       </div>
     
       <div class="module_padding">
@@ -30,8 +30,8 @@
         <div class="events_wrapper"  style="margin-bottom: 50px;">
           <% if @active_events.empty? %>
             <div class="empty">
-              You don't have any upcoming events.<br/>
-              <a href="<%= new_event_path %>">Add new Event</a>
+              You don't have anything yet.<br/>
+              <a href="<%= new_event_path %>">Add</a>
             </div>
           <% else %>
             <% @upcoming_events.each do |event| %>
@@ -61,11 +61,11 @@
 
   <div class="grid_5 module_wrapper">
     <div class="module_header">
-      <div>Social Details</div>
+      <div>Details</div>
     </div>
 
     <div id="event_summary" class="module_padding">
-      Select an event on the calendar to see the social details.
+      Select an event on the calendar to see the details.
     </div><!-- .module_padding -->
   
   </div><!-- .grid_5 -->
