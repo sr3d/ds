@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :attendants, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   
-  has_many :audio, :dependent => :destroy
+  has_many :audios, :dependent => :destroy
   
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,

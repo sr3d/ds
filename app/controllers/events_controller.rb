@@ -28,6 +28,7 @@ class EventsController < BaseController
       
       # Post.where(:published => true).paginate(:page => params[:page]).order('id DESC')
       
+      @audios =  Audio.order('created_at DESC').all
     else
       render :text => "You can't view this event.", :status => 404
     end

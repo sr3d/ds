@@ -50,10 +50,12 @@ class TwilioCallbackController < ApplicationController
     # saving the audio files.
     # http://api.twilio.com/2010-04-01/Accounts/AC598c05e863827c7a7fffa351490f10d2/Recordings/REe0a2e683a142a1e2f766801b574d4e53"
     # {"AccountSid"=>"AC598c05e863827c7a7fffa351490f10d2", "ToZip"=>"94949", "FromState"=>"IL", "Called"=>"+14155992671", 
-    # "FromCountry"=>"US", "CallerCountry"=>"US", "CalledZip"=>"94949", "Direction"=>"inbound", "FromCity"=>"LAKE FOREST", "CalledCountry"=>"US", "CallerState"=>"IL", "CallSid"=>"CA221f7db0cefaae261d03bb5dfe5e1e7b", "CalledState"=>"CA", "From"=>"+12244361127", "CallerZip"=>"60037", "FromZip"=>"60037", "CallStatus"=>"in-progress", "ToCity"=>"NOVATO", "ToState"=>"CA", "RecordingUrl"=>"http://api.twilio.com/2010-04-01/Accounts/AC598c05e863827c7a7fffa351490f10d2/Recordings/REe0a2e683a142a1e2f766801b574d4e53", "To"=>"+14155992671", "Digits"=>"#", "ToCountry"=>"US", 
+    # "FromCountry"=>"US", "CallerCountry"=>"US", "CalledZip"=>"94949", "Direction"=>"inbound", "FromCity"=>"LAKE FOREST", "CalledCountry"=>"US", "CallerState"=>"IL",
+    # "CallSid"=>"CA221f7db0cefaae261d03bb5dfe5e1e7b", "CalledState"=>"CA", "From"=>"+12244361127", "CallerZip"=>"60037", "FromZip"=>"60037", "CallStatus"=>"in-progress",
+    # "ToCity"=>"NOVATO", "ToState"=>"CA", "RecordingUrl"=>"http://api.twilio.com/2010-04-01/Accounts/AC598c05e863827c7a7fffa351490f10d2/Recordings/REe0a2e683a142a1e2f766801b574d4e53", "To"=>"+14155992671", "Digits"=>"#", "ToCountry"=>"US", 
     # "RecordingDuration"=>"15", "CallerCity"=>"LAKE FOREST", "ApiVersion"=>"2010-04-01", "Caller"=>"+12244361127", 
     # "CalledCity"=>"NOVATO", "RecordingSid"=>"REe0a2e683a142a1e2f766801b574d4e53"}
-    
+    @user.audios.create :url => params[:RecordingUrl], :duration => params[:RecordingDuration]
     respond_to do |format|
       format.xml do
         xml = <<-XML
@@ -69,7 +71,7 @@ class TwilioCallbackController < ApplicationController
   
   private
   def find_user
-    current_user = User.find_by_phone params[:From]
+    @user = current_user = User.find_by_phone(params[:From])
   end
   
   

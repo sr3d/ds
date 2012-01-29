@@ -1,5 +1,36 @@
 <div class="padding" style="padding-bottom: 30px">
   
+  <div class="grid_10">
+    <div class="module_wrapper">
+      <div class="module_header">
+        <div>Interviews</div>
+      </div><!-- .module_header -->
+      <div class="module_padding">
+        <% @audios.each do |audio| %>
+          <div class="audio">
+            Audio recording by <%= audio.user.full_name %>:  <a href="<%= audio.url %>">Play</a>
+            <div id="audio_<%= audio.id %>" class="mp3_audio"></div>
+          </div>
+        <% end %>
+      </div><!-- .module_padding -->
+    </div><!-- .module_wrapper -->
+  </div>
+
+  <script type="text/javascript" charset="utf-8">
+  $(function() {
+    $(".mp3_audio").jPlayer( {
+      ready: function () {
+        debugger
+        $(this).jPlayer("setMedia", {
+          mp3: ''
+        });
+      },
+      supplied: "mp3",
+      swfPath: "/javascripts/jPlayer/"
+    });    
+    
+  })
+  </script>
 
   <div class="grid_10">
     <div class="module_wrapper">
@@ -7,7 +38,6 @@
         <div><%= @event.name %>'s wall</div>
       </div><!-- .module_header -->
       <div class="module_padding">
-        
         <div class="comments_wrapper">
           <div id="comments" class="comments">
             <% @comments.each do |comment| %>

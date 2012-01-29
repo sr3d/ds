@@ -4,7 +4,7 @@ class CreateAudios < ActiveRecord::Migration
       t.integer :user_id
       t.string :url
       t.text :description
-
+      t.integer :duration, :default => 0
       t.timestamps
     end
   end

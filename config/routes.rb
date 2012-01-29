@@ -1,6 +1,7 @@
 Dropsocial::Application.routes.draw do
-  get "twilio_callback/index"
-  get "twilio_callback/receive_voice_recording"
+  get  "twilio_callback/index"
+  post "twilio_callback/index"
+  get  "twilio_callback/receive_voice_recording"
 
   # get "comments/create"
   # 

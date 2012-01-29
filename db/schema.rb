@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110805192353) do
+ActiveRecord::Schema.define(:version => 20120129020603) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(:version => 20110805192353) do
   add_index "attendants", ["event_id"], :name => "index_attendants_on_event_id"
   add_index "attendants", ["invite_id"], :name => "index_attendants_on_invite_id"
   add_index "attendants", ["user_id"], :name => "index_attendants_on_user_id"
+
+  create_table "audios", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "url"
+    t.text     "description"
+    t.integer  "duration",    :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -154,6 +163,8 @@ ActiveRecord::Schema.define(:version => 20110805192353) do
     t.string   "last_name",              :limit => 45
     t.string   "gender",                 :limit => 10
     t.string   "email",                                 :default => "", :null => false
+    t.string   "phone"
+    t.string   "api_token"
     t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
