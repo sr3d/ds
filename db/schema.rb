@@ -10,11 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20120128191659) do
-=======
-ActiveRecord::Schema.define(:version => 20120129020603) do
->>>>>>> ca56024368669b3ac9938484ca071b370ae0991f
+ActiveRecord::Schema.define(:version => 20120129030008) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -109,6 +105,20 @@ ActiveRecord::Schema.define(:version => 20120129020603) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "interviews", :force => true do |t|
+    t.integer  "user_id",     :null => false
+    t.integer  "type_id"
+    t.text     "url"
+    t.text     "title"
+    t.text     "description"
+    t.text     "location"
+    t.text     "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interviews", ["user_id"], :name => "index_interviews_on_user_id"
 
   create_table "invites", :force => true do |t|
     t.integer  "user_id"

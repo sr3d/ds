@@ -9,7 +9,8 @@ development:
   adapter: mysql2
   database: dropsocial_development
   username: root
-  password: 4Bcd3fg
+#  password: 4Bcd3fg
+  password:
   pool: 5
   timeout: 5000
   host: 127.0.0.1
