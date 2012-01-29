@@ -30,6 +30,8 @@ class UsersController < ApplicationController
   end
 
   def update
+    current_user.update_attributes params[:user]
+    redirect_to :controller => "events", :action => "index"
   end
 
   def destroy
@@ -38,7 +40,7 @@ class UsersController < ApplicationController
   
   # POST
   def authenticate
-    @user = User.get_demo_user
+    @user = User.find_by_phone || User.get_demo_user
     respond_to do |format|
       format.json { render_for_api :public, :json => @user }
     end

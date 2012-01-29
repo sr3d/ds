@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :first_name, :last_name, :gender
+                  :first_name, :last_name, :gender, :phone
 
   
 
@@ -46,7 +46,9 @@ class User < ActiveRecord::Base
     
     
     def find_by_phone(phone)
-      # return user if user = User.find_by_phone phone
+      if user = User.find_by_phone phone
+        return user
+      end
       # user = User.new :phone => phone
       get_demo_user
     end
@@ -160,6 +162,13 @@ class User < ActiveRecord::Base
   # profile image can be called:
   # http://graph.facebook.com/54500509/picture?type=large
   
+  before_save :normalize_phone
+  def normalize_phone
+    unless phone.blank?
+      # strip the +1 out
+      self.phone = '+1' + (phone.gsub(/^\+1/, ''))
+    end
+  end
   
   acts_as_api
 
