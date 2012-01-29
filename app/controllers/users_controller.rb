@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:authenticate]
   
   def index
   end
@@ -33,6 +33,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
+  end
+  
+  
+  # POST
+  def authenticate
+    @user = User.get_demo_user
+    respond_to do |format|
+      format.json { render_for_api :public, :json => @user }
+    end
   end
 
 end

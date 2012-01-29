@@ -26,6 +26,16 @@ class User < ActiveRecord::Base
       secondary_email = UserSecondaryEmail.find_by_email(email, :include => :user )
       return secondary_email.user if secondary_email
     end
+    
+    
+    def get_demo_user
+      return user if user = User.find_by_email("alexle@marrily.com")
+      user = User.create! :email => 'alexle@marrily.com', 
+        :password => '123456', 
+        :password_confirmation => '123456'
+      user
+    end
+    
   end
   
   # make sure the primary email isn't saved already in the secondary_email
@@ -135,4 +145,12 @@ class User < ActiveRecord::Base
   # profile image can be called:
   # http://graph.facebook.com/54500509/picture?type=large
   
+  
+  acts_as_api
+
+  api_accessible :public do |template|
+    template.add :email
+    template.add :phone
+    template.add :api_token
+  end
 end
