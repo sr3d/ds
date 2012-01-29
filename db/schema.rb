@@ -10,7 +10,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(:version => 20120128191659) do
+=======
 ActiveRecord::Schema.define(:version => 20120129020603) do
+>>>>>>> ca56024368669b3ac9938484ca071b370ae0991f
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -55,8 +59,8 @@ ActiveRecord::Schema.define(:version => 20120129020603) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
-    t.string   "provider"
-    t.string   "uid"
+    t.string   "provider",   :limit => 45
+    t.string   "uid",        :limit => 64
     t.string   "token"
     t.string   "secret"
     t.datetime "created_at"
@@ -108,9 +112,9 @@ ActiveRecord::Schema.define(:version => 20120129020603) do
 
   create_table "invites", :force => true do |t|
     t.integer  "user_id"
-    t.string   "email"
-    t.string   "name"
-    t.string   "token"
+    t.string   "email",      :limit => 100
+    t.string   "name",       :limit => 100
+    t.string   "token",      :limit => 100
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -119,13 +123,11 @@ ActiveRecord::Schema.define(:version => 20120129020603) do
   add_index "invites", ["user_id"], :name => "index_invites_on_user_id"
 
   create_table "model_metas", :force => true do |t|
-    t.string  "key",      :null => false
-    t.string  "model",    :null => false
-    t.integer "model_id", :null => false
-    t.string  "value",    :null => false
+    t.string  "key",                    :null => false
+    t.string  "model",    :limit => 40, :null => false
+    t.integer "model_id",               :null => false
+    t.string  "value",                  :null => false
   end
-
-  add_index "model_metas", ["model", "key", "model_id"], :name => "index_model_metas_on_model_and_key_and_model_id"
 
   create_table "rails_admin_histories", :force => true do |t|
     t.string   "message"

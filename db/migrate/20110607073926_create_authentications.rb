@@ -2,8 +2,8 @@ class CreateAuthentications < ActiveRecord::Migration
   def self.up
     create_table :authentications do |t|
       t.integer :user_id
-      t.string :provider
-      t.string :uid
+      t.string :provider, :limit => 45
+      t.string :uid, :limit => 64
       t.string :token
       t.string :secret
       t.timestamps
