@@ -19,5 +19,6 @@ class InterviewsController < ApplicationController
        format.xml  { render :xml => @interview }
        format.json { render :json => @interview }
     end
+  end
   
 end
