@@ -14,7 +14,7 @@
               <%= form.input :description, :as => :text, :input_html => {:rows => 10} %>
             <% end %>
             <%= form.buttons do %>
-              <%= form.commit_button %>
+              <%= form.commit_button :disable_with, :button_html => { :disable_with => "Please wait..." } %>
             <% end %>
           </div><!-- .module_padding -->
         </div><!-- .module_wrapper -->

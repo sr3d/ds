@@ -10,11 +10,15 @@ class Video < ActiveRecord::Base
     # debugger
     file = IO.read(params[:video].path)
     client = YouTubeG::Upload::VideoUpload.new
-    debugger
     youtube_code = client.upload file, nil
-    video = Video.create :video_id => youtube_code, :url => "http://", :user_id => user.id
-    interview = Interview.new :user_id => user.id, :video_id => video.id
+    video = Video.create :video_id => youtube_code, :url => "http://", :user_id => user.id, :description => params[:description]
+    interview = Interview.create :user_id => user.id, :video_id => video.id
     interview  # BLAH!  blaspheme!
+  end
+  
+  def self.create_from_video_id video_id, user
+    video = Video.create :video_id => video_id, :url => "http://", :user_id => user.id
+    interview = Interview.create :user_id => user.id, :video_id => video.id
   end
 
   def thumbnail(size = :small)

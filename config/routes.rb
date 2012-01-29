@@ -73,7 +73,12 @@ Dropsocial::Application.routes.draw do
     
   end
   
-  resources :interviews, :only => [:create]
+  resources :interviews, :only => [:create] do
+    collection do
+      get :upload_video
+      post :upload_video
+    end
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
