@@ -1,0 +1,57 @@
+<!-- image uploadify -->
+<input id="upload-photo" name="upload-photo" type="file" />
+<!-- end of image uploadify -->
+
+<br /><br />
+
+<div id="thumbnails">
+	<% if ad and ad.ad_images %>
+		<% for ad_image in ad.ad_images %>
+			<%= render :partial => 'ad_images/thumb_preview', :locals => {:ad_image => ad_image} %>
+		<% end %>
+	<% end %>
+	<div class="clear">&nbsp;</div>
+</div>
+<!-- end of image uploader -->
+
+<div class="blank3">&nbsp;</div>
+<div class="form-lable"><h4>Add Videos (optional):</h4></div>
+
+<div class="form-lable2">
+	Do you have a youtube video?
+	<%= radio_button_tag 'youtube_yes', 'yes', false, :id => 'youtube_yes' %> <%= label_tag 'youtube_yes', 'Yes' %>
+	<%= radio_button_tag 'youtube_yes', 'no', true, :id => 'youtube_no' %> <%= label_tag 'youtube_no', 'No' %>
+</div>
+
+<div class="upload-cancel-btns" id="video_upload">
+	<br />
+
+	<!-- video uploadify -->
+	<input id="upload-video" name="upload-video" type="file" />
+	<!-- end of video uploadify -->
+	<br />
+	<div class="lable-txt pd-extra-txt">We accept videos in .FLV, .WMV, .AVI, .MOV, .MP4 and .MPG. format.  Please be patient while your video is uploaded.  Do not try to upload again once the upload is completed.</div>
+	<div class="clear">&nbsp;</div>
+</div>
+
+<br /><br />
+
+<div id="existing_video_upload" style="display: none;">
+    <div class="lable-txt"><b>Enter youtube video URL or code below</b></div>
+	<div class="form-input">
+		<%= text_field_tag 'youtube_code' %>
+	</div>
+    <div class="blank0">&nbsp;</div>
+</div>
+
+<br /><br /><br />
+
+<div id="thumbnails_video_preview">
+	<% if ad and ad.ad_videos %>
+		<% for ad_video in ad.ad_videos %>
+			<%= render :partial => 'ad_videos/thumb_preview', :locals => {:ad_video => ad_video} %>
+		<% end %>
+	<% end %>
+	<div class="clear">&nbsp;</div>
+</div>
+<!-- end of video uploader -->

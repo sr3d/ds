@@ -16,8 +16,12 @@ class InterviewsController < ApplicationController
     end
     @interview_data[:user_id] = @user.id
     @interview = Interview.new @interview_data
-
-      
+    @video = Video.new
+    if params[:Filedata]
+         
+          @video = @interview.videos.create(:file_data => params[:Filedata])
+          @video.save
+    
     respond_to do |format|
        format.html # show.html.erb
        format.xml  { render :xml => @interview }
