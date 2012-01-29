@@ -45,12 +45,22 @@ class User < ActiveRecord::Base
     end
     
     
-    def find_by_phone(phone)
+    def find_or_create_by_phone(phone)
       if user = User.find_by_phone(phone)
         return user
+      else
+        name = [
+          "John",
+          "Paul",
+          "Sam",
+          "Will",
+          "Robert",
+          "Quinnie",
+          "Ben",
+        ].sample
+        user = User.create "email.#{name}.#{Time.now}@marrily.com", :password => '123456', :password_confirmation => '123456', :first_name => name, :phone => phone
+        user
       end
-      # user = User.new :phone => phone
-      get_demo_user
     end
     
   end

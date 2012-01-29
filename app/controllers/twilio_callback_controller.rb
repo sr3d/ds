@@ -2,6 +2,7 @@ class TwilioCallbackController < ApplicationController
   before_filter :find_user
   
   def index
+    
     respond_to do |format|
       format.xml do
         digits = params[:Digits]
