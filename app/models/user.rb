@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
       if user = User.find_by_email("alexle@marrily.com")
         return user
       end
-      user = User.create! :email => 'alexle@marrily.com', 
+      user = User.create! :email => 'alexle@marrily.com', :first_name => 'Alex', :last_name => 'Le',
         :password => '123456', 
         :password_confirmation => '123456'
       user
