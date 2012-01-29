@@ -3,6 +3,10 @@ class InterviewsController < ApplicationController
   def show 
     @event = Event.find params[:event_id]
     @interview = Interview.find params[:id]
+  end
+  
+  
+  def create
     @interview_data  = {}
     @interview_data[:url] = params[:interview_url] unless params[:interview_url].blank?
     @user = User.new
@@ -19,6 +23,7 @@ class InterviewsController < ApplicationController
        format.xml  { render :xml => @interview }
        format.json { render :json => @interview }
     end
+    
   end
   
 end
