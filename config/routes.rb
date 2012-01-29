@@ -1,5 +1,6 @@
 Dropsocial::Application.routes.draw do
   get "twilio_callback/index"
+  get "twilio_callback/receive_voice_recording"
 
   # get "comments/create"
   # 
@@ -29,12 +30,6 @@ Dropsocial::Application.routes.draw do
 
   get "home/index"
   match "/invite_facebook_sign_up" => "home#invite_facebook_sign_up"
-  Callme::Application.routes.draw do
-
-   match ':controller(/:action(.:format))'
-   match ':controller(/:action(/:id(.:format)))'
-
-  end
 
   devise_for :admins
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
