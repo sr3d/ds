@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
     
     
     def find_by_phone(phone)
-      if user = User.find_by_phone phone
+      if user = User.find_by_phone(phone)
         return user
       end
       # user = User.new :phone => phone
