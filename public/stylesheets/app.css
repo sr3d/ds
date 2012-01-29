@@ -48,6 +48,8 @@ body { padding: 0; margin: 0; color: white; }
 .module_header div { color: white; text-transform: uppercase; font-size: 11px; font-weight: bold; background-color: #ec1378; padding: 3px 15px; }
 .module_wrapper .module_padding { padding: 10px; }
 
+.audio_wrapper { background: url('../images/microphone.png') no-repeat top left; padding-left: 30px; }
+
 
 .attendant { padding: 3px 0px; }
 

@@ -3,13 +3,19 @@
   <div class="grid_10">
     <div class="module_wrapper">
       <div class="module_header">
-        <div>Interviews:  call 1 415-599-2671, pin 9441-2138</div>
+        <div>Interviews</div>
       </div><!-- .module_header -->
       <div class="module_padding">
-        <div class="audio">
-          Audio recording by <%= audio.user.full_name %>:  <a href="<%= audio.url %>">Play</a>
-          <div id="audio_<%= audio.id %>" class="mp3_audio"></div>
-        </div>
+        <% if @interview.audio? %>
+          <div class="audio_wrapper">
+            Interview Audio recorded by <%= @interview.user.full_name %>:  <a href="<%= @interview.url %>"  target="_blank">Play</a>
+            <p>Duration:  <%= @interview.duration %></p>
+          </div>
+        <% else %>
+          <div class="video">
+            Interview Video recorded by <%= @interview.user.full_name %>:  <a href="<%= @interview.url %>"  target="_blank">Play</a>
+          </div>          
+        <% end %>
       </div><!-- .module_padding -->
     </div><!-- .module_wrapper -->
   </div>
@@ -21,34 +27,11 @@
       </div><!-- .module_header -->
       <div class="module_padding">
         <div class="comments_wrapper">
-          <div class="fb-comments" data-href="<%= event_interview_url(@event) %>" data-num-posts="20" data-width="550" data-colorscheme="dark"></div>
+          <div class="fb-comments" data-href="<%= event_interview_url(@event, @interview) %>" data-num-posts="20" data-width="550" data-colorscheme="dark"></div>
         </div><!-- .comments_wrapper -->
       </div><!-- .module_padding -->
     </div><!-- .module_wrapper -->
   </div>
-
-
-  <div class="grid_5">
-    <div class="module_wrapper">
-      <div class="module_header">
-        <div>Social Details</div>
-      </div><!-- .module_header -->
-      <div class="module_padding">
-        
-        <div class="summary_wrapper">
-          <%= render :partial => 'summary' %>
-          
-          <div class="row">
-            <div class="left">&nbsp;</div><!-- .left -->
-            <div class="right"><%= link_to 'Add to Calendar', export_to_calendar_event_path(@event) %></div><!-- .right -->
-          </div><!-- .row -->
-          
-        </div><!-- .summary_wrapper -->
-        
-      </div><!-- .module_padding -->
-    </div><!-- .module_wrapper -->
-  
-  </div><!-- .grid_6 -->
 
 
   <div class="clear"></div>

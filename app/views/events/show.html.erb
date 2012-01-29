@@ -12,8 +12,11 @@
         <% else %>
           <% @interviews.each do |interview| %>
             <% if interview.audio? %>
-              <div class="audio">
-                Audio recording by <%= interview.user.full_name %>:  <a href="<%= interview.url %>">Play</a>
+              <div class="audio_wrapper">
+                Audio recording by <%= interview.user.full_name %>:  <a href="<%= interview.url %>" target="_blank">Play</a>
+                <!-- <div class="ui360">
+                  <a href="<%= interview.url %>">play</a>
+                </div> -->
                 <div id="audio_<%= interview.id %>" class="mp3_audio"></div>
                 <div class=""><a href="<%= event_interview_path(@event, interview.id) %>">Engage In Discussion</a></div>
               </div>
@@ -32,16 +35,31 @@
 
   <script type="text/javascript" charset="utf-8">
   $(function() {
-    $(".mp3_audio").jPlayer( {
-      ready: function () {
-        // debugger
-        $(this).jPlayer("setMedia", {
-          mp3: ''
-        });
-      },
-      supplied: "mp3",
-      swfPath: "/javascripts/jPlayer/"
-    });    
+    // $('.play_button').click(function(e) {
+    //   // e.preventDefault();
+    //   // // debugger
+    //   // soundManager.createSound({
+    //   //   id: 'mySound',
+    //   //   url: $(this).attr('href'),
+    //   //   autoLoad: true,
+    //   //   autoPlay: true,
+    //   //   onload: function() {
+    //   //     alert('The sound '+this.sID+' loaded!');
+    //   //   },
+    //   //   volume: 100
+    //   // });
+    //   // return false;
+    // });
+    // $(".mp3_audio").jPlayer( {
+    //   ready: function () {
+    //     // debugger
+    //     $(this).jPlayer("setMedia", {
+    //       mp3: ''
+    //     });
+    //   },
+    //   supplied: "mp3",
+    //   swfPath: "/javascripts/jPlayer/"
+    // });    
     
   })
   </script>
@@ -86,10 +104,3 @@
   <div class="clear"></div>
 </div><!-- .padding -->
 
-
-<script type="text/javascript">
-FB.Event.subscribe('comment.create', function(response) {
-  // console.log("response %o",response);
-  // do something with response.session
-});  
-</script>
