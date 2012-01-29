@@ -29,11 +29,20 @@ class User < ActiveRecord::Base
     
     
     def get_demo_user
-      return user if user = User.find_by_email("alexle@marrily.com")
+      if user = User.find_by_email("alexle@marrily.com")
+        return user
+      end
       user = User.create! :email => 'alexle@marrily.com', 
         :password => '123456', 
         :password_confirmation => '123456'
       user
+    end
+    
+    
+    def find_by_phone(phone)
+      # return user if user = User.find_by_phone phone
+      # user = User.new :phone => phone
+      get_demo_user
     end
     
   end

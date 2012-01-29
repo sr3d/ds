@@ -1,4 +1,6 @@
 Dropsocial::Application.routes.draw do
+  get "twilio_callback/index"
+
   # get "comments/create"
   # 
   # get "comments/update"
