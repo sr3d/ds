@@ -1,4 +1,4 @@
-require 'REXML'
+require "rexml/document"
 class YouTubeG
   module Upload
     class UploadError < Exception; end
@@ -32,7 +32,7 @@ class YouTubeG
       private
       def init_options(data, ad, opts)
         title = Time.now.to_f.to_s
-        description = "another interview #{Time.now} "#CGI::escape "#{ad.location.full_address} #{ad.category.name} #{ad.sub_category.name}\n"
+        description = "another interview #{Time.now}" #CGI::escape "#{ad.location.full_address} #{ad.category.name} #{ad.sub_category.name}\n"
 
         @opts = { 
           :mime_type => 'video/mp4',
@@ -40,8 +40,9 @@ class YouTubeG
           :title => title,
           :description => description,
           :category => 'People',
-          :keywords => %w(dschool) }.merge(opts)
-          puts @opts.inspect
+          :keywords => %w(dschool) 
+        }.merge(opts)
+        puts @opts.inspect
       end
 
       def upload_body(data)

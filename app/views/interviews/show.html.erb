@@ -13,7 +13,10 @@
           </div>
         <% else %>
           <div class="video">
-            Interview Video recorded by <%= @interview.user.full_name %>:  <a href="<%= @interview.url %>"  target="_blank">Play</a>
+            Interview Video recorded by <%= @interview.user.full_name %>.
+            <iframe class="youtube-player" type="text/html" width="560" height="385" 
+              src="http://www.youtube.com/embed/<%= @interview.video.video_id %>" frameborder="0">
+            </iframe>
           </div>          
         <% end %>
       </div><!-- .module_padding -->

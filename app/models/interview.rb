@@ -9,6 +9,10 @@ class Interview < ActiveRecord::Base
     !audio_id.nil?
   end
   
+  def video?
+    !video_id.nil?
+  end
+  
   def duration
     audio? ? audio.duration : video.duration
   end
@@ -25,5 +29,9 @@ class Interview < ActiveRecord::Base
     audio? ? audio.transcription : video.transcription
   end
 
+  def thumbnail
+    audio? ? audio.thumbnail : video.thumbnail
+  end
+  
   
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120129104425) do
+ActiveRecord::Schema.define(:version => 20120129113813) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(:version => 20120129104425) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "video_id"
+    t.integer  "user_id"
   end
 
   add_index "videos", ["interview_id"], :name => "index_videos_on_interview_id"

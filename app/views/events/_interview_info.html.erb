@@ -1,0 +1,18 @@
+<% if interview.audio? %>
+  <div class="audio_wrapper">
+    <a href="<%= event_interview_path(@event, interview) %>" class="link">
+      Audio recording by <%= interview.user.full_name %>
+    </a>
+    <a href="<%= interview.url %>" target="_blank" class="play">Play</a>
+    <div>Posted <%= time_ago_in_words interview.created_at %> ago</div>
+    <div class="engage_in_discussion_wrapper"><a href="<%= event_interview_path(@event, interview.id) %>">Engage In Discussion</a></div>
+  </div>
+<% else %>
+  <div class="video_wrapper">
+    <a href="<%= event_interview_path(@event, interview) %>" class="link">
+      Video recording by <%= interview.user.full_name %>
+    </a>
+    <div>Posted <%= time_ago_in_words interview.created_at %> ago</div>
+    <div class="engage_in_discussion_wrapper"><a href="<%= event_interview_path(@event, interview.id) %>">Engage In Discussion</a></div>
+  </div>
+<% end %>

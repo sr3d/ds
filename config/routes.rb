@@ -73,6 +73,8 @@ Dropsocial::Application.routes.draw do
     
   end
   
+  resources :interviews, :only => [:create]
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
