@@ -11,9 +11,10 @@ class CreateInterview < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_index :events, :user_id
+    add_index :interviews, :user_id
   end
 
   def self.down
+    drop_table :interviews 
   end
 end
