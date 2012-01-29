@@ -1,14 +1,14 @@
 <div class="grid_10">
   <div class="module_wrapper">
     <div class="module_header">
-      <div>Your Friends</div>
+      <div>Your Teammates</div>
     </div><!-- .module_header -->
     <div class="module_padding">
       
       <div class="friends_list_wrapper">
         <% if current_user.friends.empty? %>
           <div>
-            You have no friends yet.  <%= link_to 'Invite them now!', invite_friends_path %>
+            You have no teammates yet.  <%= link_to 'Invite them now!', invite_friends_path %>
           </div>
         <% else %>
           <ul>
@@ -31,13 +31,12 @@
 <div class="grid_5">
   <div class="module_wrapper">
     <div class="module_header">
-      <div>Your DropSocial Invites</div>
+      <div>Your D.School Invites</div>
     </div><!-- .module_header -->
     <div class="module_padding">
-      <a href="<%= invite_friends_path %>" class="purple_link">Invite Your Friends</a>
+      <a href="<%= invite_friends_path %>" class="purple_link">Invite Your Teammates</a>
       <div id="pending_invites_wrapper" style="margin-top:20px">
         <div>
-          
         </div>Pending Invitations
         <ul>
           <% current_user.invites.each do |invite| %>

@@ -1,4 +1,5 @@
 Dropsocial::Application.routes.draw do
+
   get  "twilio_callback/index"
   post "twilio_callback/index"
   get  "twilio_callback/receive_voice_recording"
@@ -55,6 +56,7 @@ Dropsocial::Application.routes.draw do
     collection do
       get :social_calendar
     end
+    
     member do
       post :update_rsvp
       get  :export_to_calendar
@@ -64,6 +66,8 @@ Dropsocial::Application.routes.draw do
     resources :comments do
       #
     end
+    
+    resources :interviews, :only => [:show]
     
   end
   

@@ -3,53 +3,21 @@
   <div class="grid_10">
     <div class="module_wrapper">
       <div class="module_header">
-        <div>Interviews: <span style="float: right">To Interview, call 415-599-2671, pin 9441-2138</span></div>
+        <div>Interviews:  call 1 415-599-2671, pin 9441-2138</div>
       </div><!-- .module_header -->
       <div class="module_padding">
-        <% %>
-        <% if @interviews.empty? %>
-          <h3>Not interviews yet!.  Go out there!</h3>
-        <% else %>
-          <% @interviews.each do |interview| %>
-            <% if interview.audio? %>
-              <div class="audio">
-                Audio recording by <%= interview.user.full_name %>:  <a href="<%= interview.url %>">Play</a>
-                <div id="audio_<%= interview.id %>" class="mp3_audio"></div>
-                <div class=""><a href="<%= event_interview_path(@event, interview.id) %>">Engage In Discussion</a></div>
-              </div>
-            <% else %>
-              <div class="video">
-                Video recording by <%= interview.user.full_name %>:  <a href="<%= interview.url %>">Play</a>
-                <div id="video_<%= interview.id %>" class="video_file"></div>
-                <div class=""><a href="<%= event_interview_path(@event, interview.id) %>">Engage In Discussion</a></div>
-              </div>
-            <% end %>
-          <% end %>
-        <% end %>
+        <div class="audio">
+          Audio recording by <%= audio.user.full_name %>:  <a href="<%= audio.url %>">Play</a>
+          <div id="audio_<%= audio.id %>" class="mp3_audio"></div>
+        </div>
       </div><!-- .module_padding -->
     </div><!-- .module_wrapper -->
   </div>
 
-  <script type="text/javascript" charset="utf-8">
-  $(function() {
-    $(".mp3_audio").jPlayer( {
-      ready: function () {
-        // debugger
-        $(this).jPlayer("setMedia", {
-          mp3: ''
-        });
-      },
-      supplied: "mp3",
-      swfPath: "/javascripts/jPlayer/"
-    });    
-    
-  })
-  </script>
-
   <div class="grid_10">
     <div class="module_wrapper">
       <div class="module_header">
-        <div><%= @event.name %>'s wall</div>
+        <div>Engage Now in our Discussion</div>
       </div><!-- .module_header -->
       <div class="module_padding">
         <div class="comments_wrapper">

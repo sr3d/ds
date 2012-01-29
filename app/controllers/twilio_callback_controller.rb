@@ -1,7 +1,6 @@
 class TwilioCallbackController < ApplicationController
   before_filter :find_user
   
-  
   def index
     respond_to do |format|
       format.xml do
@@ -55,7 +54,10 @@ class TwilioCallbackController < ApplicationController
     # "ToCity"=>"NOVATO", "ToState"=>"CA", "RecordingUrl"=>"http://api.twilio.com/2010-04-01/Accounts/AC598c05e863827c7a7fffa351490f10d2/Recordings/REe0a2e683a142a1e2f766801b574d4e53", "To"=>"+14155992671", "Digits"=>"#", "ToCountry"=>"US", 
     # "RecordingDuration"=>"15", "CallerCity"=>"LAKE FOREST", "ApiVersion"=>"2010-04-01", "Caller"=>"+12244361127", 
     # "CalledCity"=>"NOVATO", "RecordingSid"=>"REe0a2e683a142a1e2f766801b574d4e53"}
-    @user.audios.create :url => params[:RecordingUrl], :duration => params[:RecordingDuration]
+
+    audio = @user.audios.create :url => params[:RecordingUrl], :duration => params[:RecordingDuration]
+    interview = @user.interviews.create :audio_id => audio.id
+    # audio = @user.audiointerview.audio.new :url => params[:RecordingUrl], :duration => params[:RecordingDuration], :user_id => @user.id
     respond_to do |format|
       format.xml do
         xml = <<-XML

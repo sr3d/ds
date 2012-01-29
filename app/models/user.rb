@@ -13,10 +13,13 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :audios, :dependent => :destroy
   has_many :interviews, :dependent => :destroy
+  
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :first_name, :last_name, :gender
+
+  
 
   acts_as_metadata :meta => ['primary_email_confirmed', 'has_invited_friends']
   

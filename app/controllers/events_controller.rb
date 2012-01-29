@@ -23,12 +23,9 @@ class EventsController < BaseController
     if current_user.can_view_event? @event
       @attendants = @event.attendants
       @attendants = [@event.user] + @attendants
-      # @comments - @event.comments.latest(50)
-      @comments = Comment.where(:event_id => @event.id).all(:include => {:user => :authentications}) #@event.comments.order('comments.id DESC').limit(20).all
-      
-      # Post.where(:published => true).paginate(:page => params[:page]).order('id DESC')
-      
-      @audios =  Audio.order('created_at DESC').all
+      @comments = []
+      @interviews = Interview.order('created_at DESC').all(:include => [ :audio ])
+      # @audios =  @interviews.collect{|interview| interview.audio}
     else
       render :text => "You can't view this event.", :status => 404
     end
