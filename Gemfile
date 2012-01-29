@@ -41,6 +41,7 @@ group :development, :test do
   gem "rspec-rails", ">= 2.0.1"
 end
 
+gem "twilio-ruby"
 gem "omniauth"
 gem "devise"
 gem "hoptoad_notifier"
