@@ -35,10 +35,14 @@ ActiveRecord::Schema.define(:version => 20110805192353) do
     t.integer  "invite_id"
     t.integer  "event_id"
     t.boolean  "is_co_organizer"
+    t.string   "rsvp_status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "rsvp_status"
   end
+
+  add_index "attendants", ["event_id"], :name => "index_attendants_on_event_id"
+  add_index "attendants", ["invite_id"], :name => "index_attendants_on_invite_id"
+  add_index "attendants", ["user_id"], :name => "index_attendants_on_user_id"
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -150,7 +154,6 @@ ActiveRecord::Schema.define(:version => 20110805192353) do
     t.string   "last_name",              :limit => 45
     t.string   "gender",                 :limit => 10
     t.string   "email",                                 :default => "", :null => false
-    t.string   "other_email"
     t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -165,7 +168,6 @@ ActiveRecord::Schema.define(:version => 20110805192353) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["other_email"], :name => "index_users_on_other_email"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

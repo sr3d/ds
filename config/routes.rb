@@ -36,6 +36,8 @@ Dropsocial::Application.routes.draw do
     collection do
       put :confirm_primary_email
       get :social_calendar
+      
+      post :authenticate
     end
   end
 
