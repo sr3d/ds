@@ -147,6 +147,7 @@ GEM
       oa-oauth (= 0.2.6)
       oa-openid (= 0.2.6)
     orm_adapter (0.0.5)
+    pg (0.12.2)
     polyglot (0.3.1)
     pyu-ruby-sasl (0.0.3.3)
     rack (1.2.3)
@@ -239,6 +240,7 @@ DEPENDENCIES
   jquery-rails
   mysql2 (< 0.3)
   omniauth
+  pg
   rails (= 3.0.7)
   rails_admin!
   rspec-rails (>= 2.0.1)

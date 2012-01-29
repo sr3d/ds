@@ -8,7 +8,6 @@ gem 'rails', '3.0.7'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2', '< 0.3'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -39,7 +38,13 @@ group :development, :test do
   gem 'autotest-fsevent'
   gem 'autotest'
   gem "rspec-rails", ">= 2.0.1"
+  
+  gem 'mysql2', '< 0.3'
 end
+
+# group :production do
+#   gem "pg"
+# end
 
 
 source :gemcutter
